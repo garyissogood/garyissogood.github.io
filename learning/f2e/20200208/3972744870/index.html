@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://garyissogood.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="語法 預覽 語法 預覽    *斜體* 斜體 ~~刪除線~~ 刪除線   **粗體** 粗體 &lt;u&gt;底線&lt;u&gt; 底線   ***粗斜體*** 粗斜體 ，、。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown常用語法">
+<meta property="og:url" content="https://garyissogood.github.io/learning/f2e/20200208/3972744870/index.html">
+<meta property="og:site_name" content="蓋間雜貨坊">
+<meta property="og:description" content="語法 預覽 語法 預覽    *斜體* 斜體 ~~刪除線~~ 刪除線   **粗體** 粗體 &lt;u&gt;底線&lt;u&gt; 底線   ***粗斜體*** 粗斜體 ，、。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="article:published_time" content="2020-02-08T14:09:05.000Z">
+<meta property="article:modified_time" content="2020-02-19T09:05:39.364Z">
+<meta property="article:author" content="蓋瑞">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="note">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garyissogood.github.io/images/loading.gif">
+
+<link rel="canonical" href="https://garyissogood.github.io/learning/f2e/20200208/3972744870/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Markdown常用語法 | 蓋間雜貨坊</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158633037-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158633037-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蓋間雜貨坊</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">蓋瑞的筆記室/書房/運動間/玩樂房</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://garyissogood.github.io/learning/f2e/20200208/3972744870/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="蓋瑞">
+      <meta itemprop="description" content="這裡是蓋瑞的學習筆記,也是閱讀筆記,更是到處運動、到處玩樂的紀錄~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓋間雜貨坊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Markdown常用語法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-02-08 22:09:05" itemprop="dateCreated datePublished" datetime="2020-02-08T22:09:05+08:00">2020-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-02-19 17:05:39" itemprop="dateModified" datetime="2020-02-19T17:05:39+08:00">2020-02-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning/" itemprop="url" rel="index">
+                    <span itemprop="name">學習趣</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/learning/f2e/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="所需閱讀時間">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">所需閱讀時間 &asymp;</span>
+              <span>3 分鐘</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <table>
+<thead>
+<tr>
+<th>語法</th>
+<th align="left">預覽</th>
+<th align="right">語法</th>
+<th align="center">預覽</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>*斜體*</code></td>
+<td align="left"><em>斜體</em></td>
+<td align="right"><code>~~刪除線~~</code></td>
+<td align="center"><del>刪除線</del></td>
+</tr>
+<tr>
+<td><code>**粗體**</code></td>
+<td align="left"><strong>粗體</strong></td>
+<td align="right"><code>&lt;u&gt;底線&lt;u&gt;</code></td>
+<td align="center"><u>底線<u></td>
+</tr>
+<tr>
+<td><code>***粗斜體***</code></td>
+<td align="left"><strong><em>粗斜體</em></strong></td>
+<td align="right">，、。</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<a id="more"></a>
+<hr>
+<h3 id="標題"><a href="#標題" class="headerlink" title="標題"></a>標題</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># H1標題</span><br><span class="line">## H2標題</span><br><span class="line">### H3標題</span><br><span class="line">#### H4標題</span><br><span class="line">##### H5標題</span><br><span class="line">###### H6標題</span><br></pre></td></tr></table></figure>
+<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/0208/0208-1.jpg">
+
+<hr>
+<h3 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h3><p><strong><em>單行程式碼 :</em></strong> 插入在文字間的程式碼</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`單行程式碼`</span></span><br></pre></td></tr></table></figure>
+<p>用在文字間的<code>單行程式碼</code>，可穿插使用</p>
+<p><strong><em>多行程式碼 :</em></strong> 上下三個反引號```包住程式碼<br>‵‵‵<br>//程式碼區塊，、。<br>‵‵‵</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">‵‵‵(可加 javascript / scss)</span><br><span class="line">main&#123;  <span class="string">display:</span> block; <span class="string">margin:</span> <span class="number">0</span>;</span><br><span class="line">    <span class="meta">@include</span> rwd-pad &#123; margin-<span class="string">top:</span> <span class="number">60</span>px;&#125;</span><br><span class="line">&#125;</span><br><span class="line">‵‵‵</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//程式碼區塊</span></span><br><span class="line">$(<span class="string">".mobile__menu"</span>).hide();	</span><br><span class="line">$(<span class="string">".JS-mobile__menuBtn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	$(<span class="keyword">this</span>).slideToggle(<span class="number">300</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">main&#123;  <span class="attribute">display</span>: block; <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">@include</span> rwd-pad &#123; <span class="attribute">margin-top</span>: <span class="number">60px</span>;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="文字顏色"><a href="#文字顏色" class="headerlink" title="文字顏色"></a>文字顏色</h3><p>寫法<code>&lt;font color=#色碼&gt;顏色&lt;/font&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>顏色</th>
+<th>預覽</th>
+<th>顏色</th>
+<th>預覽</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>酒紅色 #800000</td>
+<td><font color=#800000>酒紅色</font></td>
+<td>墨綠色 #008000</td>
+<td><font color=#008000>墨綠色</font></td>
+</tr>
+<tr>
+<td>紅色 #FF0000</td>
+<td><font color=#FF0000>紅色</font></td>
+<td>綠色 #00FF00</td>
+<td><font color=#00FF00>綠色</font></td>
+</tr>
+<tr>
+<td>橘色 #FF6600</td>
+<td><font color=#FF6600>橘色</font></td>
+<td>深藍色 #0000FF</td>
+<td><font color=#0000FF>深藍色</font></td>
+</tr>
+<tr>
+<td>金色 #FFD700</td>
+<td><font color=#FFD700>金色</font></td>
+<td>青色 #00FFFF</td>
+<td><font color=#00FFFF>青色</font></td>
+</tr>
+<tr>
+<td>黃色 #FFFF00</td>
+<td><font color=#FFFF00>黃色</font></td>
+<td>紫色 #800080</td>
+<td><font color=#800080>紫色</font></td>
+</tr>
+<tr>
+<td>灰色 #808080</td>
+<td><font color=#808080>灰色</font></td>
+<td>粉紅色 #FF00FF</td>
+<td><font color=#FF00FF>粉紅色</font></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="分隔線"><a href="#分隔線" class="headerlink" title="分隔線"></a>分隔線</h3><p>用三個連續以上的 - - - 或 *** 中間不能有文字</p>
+<hr>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><code>&gt; 引用</code> 寫法 &gt; 空格後輸入文字</p>
+<blockquote>
+<p>低頭不是認輸，是要看清自己的路；仰頭不是驕傲，是要看見自己的天空。</p>
+</blockquote>
+<hr>
+<h3 id="項目符號-編號"><a href="#項目符號-編號" class="headerlink" title="項目符號/編號"></a>項目符號/編號</h3><p><strong><em>項目符號</em></strong>可用<code>-``*``+</code>放在開頭，空格後輸入文字</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 列點<span class="number">1</span></span><br><span class="line">- 列點<span class="number">2</span></span><br><span class="line">- 列點<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>列點1</li>
+<li>列點2</li>
+<li>列點3</li>
+</ul>
+<p><strong><em>編號</em></strong> 用數字後點，在空格後輸入文字</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 列點<span class="number">1</span></span><br><span class="line"><span class="number">2.</span> 列點<span class="number">2</span></span><br><span class="line"><span class="number">3.</span> 列點<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>列點1</li>
+<li>列點2</li>
+<li>列點3</li>
+</ol>
+<p><strong><em>「階層式」的項目符號/編號</em></strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>寫Blog好處</span><br><span class="line"><span class="bullet">  - </span>寫出技術力</span><br><span class="line"><span class="bullet">  - </span>寫出成長紀錄</span><br><span class="line"><span class="bullet">  - </span>寫出品牌形象</span><br><span class="line"><span class="bullet">    - </span>創造個人價值</span><br></pre></td></tr></table></figure>
+<ul>
+<li>寫Blog好處<ul>
+<li>寫出技術力</li>
+<li>寫出成長紀錄</li>
+<li>寫出品牌形象<ul>
+<li>創造個人價值 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="代辦事項"><a href="#代辦事項" class="headerlink" title="代辦事項"></a>代辦事項</h3><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- <span class="comment">[ ]</span> 代辦一  //- <span class="comment">[]</span> 代表選取格</span><br><span class="line">- <span class="comment">[x]</span> 代辦二  //<span class="comment">[]</span>中輸入x，代表選取 </span><br><span class="line">- <span class="comment">[x]</span> 代辦三</span><br></pre></td></tr></table></figure>
+<ul>
+<li><input disabled="" type="checkbox"> 代辦一</li>
+<li><input checked="" disabled="" type="checkbox"> 代辦二 </li>
+<li><input checked="" disabled="" type="checkbox"> 代辦三</li>
+</ul>
+<hr>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| Column 1 | Column 2 | Column 3 | //標題列 |</span><br><span class="line">| -------- | -------- | -------- |//分隔線，可用來對齊</span><br><span class="line">| Text1    | Text2    | Text3    | //內文</span><br><span class="line">| Text4    | Text5    | Text6    |</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>Column 1</th>
+<th>Column 2</th>
+<th>Column 3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Text1</td>
+<td>Text2</td>
+<td>Text3</td>
+</tr>
+<tr>
+<td>Text4</td>
+<td>Text5</td>
+<td>Text6</td>
+</tr>
+</tbody></table>
+<p>對齊方式</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|<span class="string"> 預設對齊 </span>|<span class="string"> 靠左對齊 </span>|<span class="string"> 靠右對齊 </span>|<span class="string"> 置中對齊 </span>|</span><br><span class="line">|<span class="string"> -------- </span>|<span class="string"> :------- </span>|<span class="string"> -------: </span>|<span class="string"> :------: </span>|</span><br><span class="line">|<span class="string"> Text1    </span>|<span class="string"> Text2    </span>|<span class="string">    Text3 </span>|<span class="string">  Text4   </span>|</span><br><span class="line">|<span class="string"> Text5    </span>|<span class="string"> Text6    </span>|<span class="string">    Text7 </span>|<span class="string">  Text8   </span>|</span><br><span class="line">|<span class="string"> Text9    </span>|<span class="string"> Text10   </span>|<span class="string">   Text11 </span>|<span class="string">  Text12  </span>|</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>預設對齊</th>
+<th align="left">靠左對齊</th>
+<th align="right">靠右對齊</th>
+<th align="center">置中對齊</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Text1</td>
+<td align="left">Text2</td>
+<td align="right">Text3</td>
+<td align="center">Text4</td>
+</tr>
+<tr>
+<td>Text5</td>
+<td align="left">Text6</td>
+<td align="right">Text7</td>
+<td align="center">Text8</td>
+</tr>
+<tr>
+<td>Text9</td>
+<td align="left">Text10</td>
+<td align="right">Text11</td>
+<td align="center">Text12</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="連結"><a href="#連結" class="headerlink" title="連結"></a>連結</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">標題</span>](<span class="link">連結</span>) //一般文字連結</span><br><span class="line">![<span class="string">圖片說明</span>](<span class="link">連結</span>) //圖片連結用法1</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"連結"</span>&gt;</span></span> //圖片連結用法2</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://ithelp.ithome.com.tw/markdown" target="_blank" rel="noopener">Markdown常用語法</a><br><a href="https://ed521.github.io/2019/08/hexo-markdown/" target="_blank" rel="noopener">Markdown 語法大全</a></p>
+<p><img src="/images/loading.gif" data-original="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google首頁Logo"></p>
+ <img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/0209/0209-index.jpg">
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/markdown/" rel="tag"># markdown</a>
+              <a href="/tags/note/" rel="tag"># note</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/learning/hexo/20200209/1127336969/" rel="next" title="hexo 架設Blog紀錄">
+      hexo 架設Blog紀錄 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#標題"><span class="nav-number">1.</span> <span class="nav-text">標題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程式碼"><span class="nav-number">2.</span> <span class="nav-text">程式碼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文字顏色"><span class="nav-number">3.</span> <span class="nav-text">文字顏色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分隔線"><span class="nav-number">4.</span> <span class="nav-text">分隔線</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用"><span class="nav-number">5.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#項目符號-編號"><span class="nav-number">6.</span> <span class="nav-text">項目符號&#x2F;編號</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代辦事項"><span class="nav-number">7.</span> <span class="nav-text">代辦事項</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表格"><span class="nav-number">8.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#連結"><span class="nav-number">9.</span> <span class="nav-text">連結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="蓋瑞"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">蓋瑞</p>
+  <div class="site-description" itemprop="description">這裡是蓋瑞的學習筆記,也是閱讀筆記,更是到處運動、到處玩樂的紀錄~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gary Blog</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+</html>
