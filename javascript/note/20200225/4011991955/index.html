@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-gary.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-gary.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-gary.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://garyissogood.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#37c6c0","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="AJAX非同步大解密 (筆記)">
+<meta property="og:url" content="https://garyissogood.github.io/javascript/note/20200225/4011991955/index.html">
+<meta property="og:site_name" content="Gary Note">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="article:published_time" content="2020-02-25T13:18:33.000Z">
+<meta property="article:modified_time" content="2020-02-25T15:57:26.594Z">
+<meta property="article:author" content="Gary">
+<meta property="article:tag" content="w3HexSchool">
+<meta property="article:tag" content="note">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="大神來六角">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garyissogood.github.io/images/loading.gif">
+
+<link rel="canonical" href="https://garyissogood.github.io/javascript/note/20200225/4011991955/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>AJAX非同步大解密 (筆記) | Gary Note</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158633037-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158633037-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gary Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">蓋瑞的學習筆記室</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://garyissogood.github.io/javascript/note/20200225/4011991955/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gary">
+      <meta itemprop="description" content="前端學習筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gary Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AJAX非同步大解密 (筆記)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-02-25 21:18:33 / 修改時間：23:57:26" itemprop="dateCreated datePublished" datetime="2020-02-25T21:18:33+08:00">2020-02-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/note/" itemprop="url" rel="index">
+                    <span itemprop="name">筆記</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/javascript/20200225/0225-banner.jpg">
+<a id="more"></a>
+
+<h2 id="Event-Queue-觀念重點"><a href="#Event-Queue-觀念重點" class="headerlink" title="Event Queue 觀念重點"></a><font color=#0000FF>Event Queue 觀念重點</font></h2><p>Event Queue 就是事件佇列，一次只能執行一件事，好比是買口罩排隊的概念，誰先排就誰先拿，先進先出的概念。</p>
+<div class="note info">
+            <p>等待條件觸發在 JavaScript 稱為 Event queue。像是 setTimeout, addEventListener, XMLHttpRequest 等等，這些方法在執行時會先將事件放到這地方，並將所有的事件堆疊完成後，才會開始讓 event queue 內的事件被觸發。</p>
+          </div>
+
+<h3 id="JavaScript是單線程語言"><a href="#JavaScript是單線程語言" class="headerlink" title="JavaScript是單線程語言"></a><font color=#777777>JavaScript是單線程語言</font></h3><p>JavaScript 是 Single Thread，啟動JavaScript語法時只會啟動一顆CPU單核，一次只能做一件事。</p>
+<h3 id="Event-Queue利用時間差"><a href="#Event-Queue利用時間差" class="headerlink" title="Event Queue利用時間差"></a><font color=#777777>Event Queue利用時間差</font></h3><p>讓 JavaScript 感覺好像可以同時做很多事情，其實沒有，只是利用 event queue 產生時間差。</p>
+<h3 id="計時器-AJAX等等不是單線程"><a href="#計時器-AJAX等等不是單線程" class="headerlink" title="計時器,AJAX等等不是單線程"></a><font color=#777777>計時器,AJAX等等不是單線程</font></h3><p>setTimeout , AJAX , Promise 等等是屬於 WebAPIs，不在 JavaScript 單線程限制範圍內。</p>
+<h2 id="Event-Queue-Demo"><a href="#Event-Queue-Demo" class="headerlink" title="Event Queue Demo"></a>Event Queue Demo</h2><h3 id="Demo-1-單線程"><a href="#Demo-1-單線程" class="headerlink" title="Demo 1 / 單線程"></a><font color=#777777>Demo 1 / 單線程</font></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"a"</span>);                  <span class="comment">//1.先執行 a</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>)</span>&#123;                    <span class="comment">// run 的函數</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"b"</span>);</span><br><span class="line">&#125;</span><br><span class="line">run();                             <span class="comment">//2.執行 run 的函數得到 b</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"c"</span>);                  <span class="comment">//3.最後執行 c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//---------------------------------打上以上語法，會依照單一線程陸續出現以下順序</span></span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
+<h3 id="Demo-2-非同步-單線程"><a href="#Demo-2-非同步-單線程" class="headerlink" title="Demo 2 / 非同步(單線程)"></a><font color=#777777>Demo 2 / 非同步(單線程)</font></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"a"</span>);                  <span class="comment">//1.先執行 a</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>)</span>&#123;                    <span class="comment">// run 的函數</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"b"</span>);</span><br><span class="line">&#125;</span><br><span class="line">setTimeout(run,<span class="number">3000</span>)               <span class="comment">//2.使用計時器會放入Event Queue，過3秒後執行 run 的函數得到 b</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"c"</span>);                  <span class="comment">//3.執行 c 完後，再去執行已經放進Event Queue的 b (一次只能執行一件事)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//---------------------------------打上以上語法，出現以下順序，</span></span><br><span class="line">a</span><br><span class="line">c</span><br><span class="line"><span class="literal">undefined</span>                           <span class="comment">//等待計時器</span></span><br><span class="line">b                                   <span class="comment">//過3秒後出現b</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Demo-3-非同步-WebAPIs"><a href="#Demo-3-非同步-WebAPIs" class="headerlink" title="Demo 3 / 非同步(WebAPIs)"></a><font color=#777777>Demo 3 / 非同步(WebAPIs)</font></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"a"</span>);                  <span class="comment">//1.先執行 a</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>)</span>&#123;                    <span class="comment">// run 的函數</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"b"</span>);</span><br><span class="line">&#125;</span><br><span class="line">setTimeout(run,<span class="number">3000</span>)               <span class="comment">//2.將計時器放入第一個event queue，3秒後執行 run 的函數得到 b</span></span><br><span class="line"><span class="keyword">var</span> start = <span class="built_in">Date</span>.now();             </span><br><span class="line"><span class="keyword">while</span>(<span class="built_in">Date</span>.now() - start &lt;= <span class="number">5000</span>)&#123; <span class="comment">//3.將迴圈放入第二個event queue，執行 5 秒鐘</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"c"</span>);                  <span class="comment">//4.執行 c ，</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//---------------------------------打上以上語法，出現以下順序，</span></span><br><span class="line">a</span><br><span class="line">c                                   <span class="comment">//與b同時出現</span></span><br><span class="line"><span class="literal">undefined</span>                           <span class="comment">//等待計時器</span></span><br><span class="line">b                                   <span class="comment">//與c同時出現</span></span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <p>c、b 會同時出現，是因為跑放入第一個queue的計時器b，3秒後執行run函數得到b，b在queue裡待著，<br>然後再執行第二個queue的迴圈，5秒鐘後，queue裡沒有其他要做的，就把b放出來，就會同步跟c出現。</p>
+          </div>
+
+<hr>
+<h2 id="AJAX-觀念重點"><a href="#AJAX-觀念重點" class="headerlink" title="AJAX 觀念重點"></a><font color=#0000FF>AJAX 觀念重點</font></h2><h3 id="請求回應方式"><a href="#請求回應方式" class="headerlink" title="請求回應方式"></a>請求回應方式</h3><ul>
+<li><strong>傳統網頁 :</strong><br>請求 &gt; 等待回應 &gt; 請求 &gt; 等待回應 … 一直重複一個請求，在等待一個回應後，才能再請求動作。</li>
+<li><strong>AJAX網頁 :</strong><br>在背景送出請求取得回應，同時還可以繼續在網頁上繼續動作</li>
+</ul>
+<h3 id="名稱由來"><a href="#名稱由來" class="headerlink" title="名稱由來"></a>名稱由來</h3><p>AJAX原名為 Asynchronous JavaScript and XML，其中<code>XML</code>，是早期比較流行的資料交換格式，<br>現在是流行<code>JSON</code>格式。</p>
+<h3 id="目前常見的底層-原生語法-等"><a href="#目前常見的底層-原生語法-等" class="headerlink" title="目前常見的底層 (原生語法..等)"></a>目前常見的底層 (原生語法..等)</h3><ul>
+<li>XMLHttpRequest ( IE7以上支援、jQuery, Axios )</li>
+<li>fetch ( 較新，HTML5才有、IE11(含)以下Bye了 )</li>
+</ul>
+<h3 id="測試用API"><a href="#測試用API" class="headerlink" title="測試用API"></a>測試用API</h3><ul>
+<li><a href="http://www.mocky.io" target="_blank" rel="noopener">http://www.mocky.io</a></li>
+<li><a href="https://www.mockable.io" target="_blank" rel="noopener">https://www.mockable.io</a></li>
+</ul>
+<h2 id="AJAX-Demo"><a href="#AJAX-Demo" class="headerlink" title="AJAX Demo"></a>AJAX Demo</h2><h3 id="Demo-1-非同步GET請求發送"><a href="#Demo-1-非同步GET請求發送" class="headerlink" title="Demo 1 / 非同步GET請求發送"></a><font color=#777777>Demo 1 / 非同步GET請求發送</font></h3><p>利用測試的API，得到連結套回程式碼中<br><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/javascript/20200225/0225-1.jpg"></p>
+<p>利用瀏覽器 Console ，輸入程式碼</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"start"</span>);</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.addEventListener(<span class="string">'load'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">&#125;);</span><br><span class="line">xhr.open(<span class="string">'GET'</span>,<span class="string">'測試API產生出來的網址'</span>,<span class="literal">true</span>); <span class="comment">//true啟動非同步 </span></span><br><span class="line">xhr.send();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"end"</span>);</span><br><span class="line">-----------------------------------輸入後會得到以下非同步結果</span><br><span class="line">start</span><br><span class="line">end</span><br><span class="line"><span class="literal">undefined</span></span><br><span class="line">message;info</span><br></pre></td></tr></table></figure>
+<p>依序處理console，碰到要請求回應的就在背景處理，讓程式碼繼續往下跑，<br>所以會先出來 <code>start</code> 再來跳過請求處理，出來 <code>end</code>，最後等待讀取完畢出現 <code>message;info</code></p>
+<h3 id="Demo-2-同步GET請求發送"><a href="#Demo-2-同步GET請求發送" class="headerlink" title="Demo 2 / 同步GET請求發送"></a><font color=#777777>Demo 2 / 同步GET請求發送</font></h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log("start");</span><br><span class="line">var xhr = <span class="built_in">new</span> XMLHttpRequest();</span><br><span class="line">xhr.<span class="keyword">open</span>(<span class="string">'GET'</span>,<span class="string">'測試API產生出來的網址'</span>,<span class="keyword">false</span>); //同步</span><br><span class="line">xhr.send();</span><br><span class="line">console.log(xhr.responseText);</span><br><span class="line">console.log("end");</span><br><span class="line"><span class="comment">-----------------------------------輸入後會得到以下結果</span></span><br><span class="line"><span class="keyword">start</span></span><br><span class="line">message;<span class="keyword">info</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>同步會先 <code>start</code>，再來等待中間那段請求產生的文字<code>message;info</code>， <code>end</code>會最後才出現。</p>
+<div class="note warning">
+            <p>建議盡可能都使用非同步處理，因為使用同步可能會等待很多時間處理，可能會影響渲染網頁畫面不完全，而有不好使用體驗。</p>
+          </div>
+
+<h3 id="Demo-3-非同步POST請求發送"><a href="#Demo-3-非同步POST請求發送" class="headerlink" title="Demo 3 / 非同步POST請求發送"></a><font color=#777777>Demo 3 / 非同步POST請求發送</font></h3><p>如果要傳送資料給遠端，將<code>GET</code>改成<code>POST</code>，如果要帶參數傳回去可用<code>FormData()</code>方式處理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">"start"</span>);</span><br><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> FormData();  <span class="comment">//使用參數資料</span></span><br><span class="line">data.append(<span class="string">'id'</span>,<span class="string">'5'</span>);      <span class="comment">//寫入參數</span></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.addEventListener(<span class="string">'load'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">&#125;);</span><br><span class="line">xhr.open(<span class="string">'POST'</span>,<span class="string">'測試API產生出來的網址'</span>,<span class="literal">true</span>); <span class="comment">//非同步</span></span><br><span class="line">xhr.send(data);   <span class="comment">//帶入data參數資料</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"end"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Demo-4-同步POST請求發送"><a href="#Demo-4-同步POST請求發送" class="headerlink" title="Demo 4 / 同步POST請求發送"></a><font color=#777777>Demo 4 / 同步POST請求發送</font></h3><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">console.<span class="keyword">log</span>(<span class="string">"start"</span>);</span><br><span class="line"><span class="built_in">var</span> <span class="built_in">data</span> = <span class="literal">new</span> FormData();  <span class="comment">//使用參數資料</span></span><br><span class="line"><span class="built_in">data</span>.append(<span class="string">'id'</span>,<span class="string">'5'</span>);      <span class="comment">//寫入參數</span></span><br><span class="line"><span class="built_in">var</span> xhr = <span class="literal">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">'GET'</span>,<span class="string">'測試API產生出來的網址'</span>,<span class="literal">false</span>); <span class="comment">//同步</span></span><br><span class="line">xhr.send(<span class="built_in">data</span>);   <span class="comment">//帶入data參數資料</span></span><br><span class="line">console.<span class="keyword">log</span>(xhr.responseText);</span><br><span class="line">console.<span class="keyword">log</span>(<span class="string">"end"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Demo-5-fetch發送GET請求"><a href="#Demo-5-fetch發送GET請求" class="headerlink" title="Demo 5 / fetch發送GET請求"></a><font color=#777777>Demo 5 / fetch發送GET請求</font></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">"測試API產生出來的網址"</span>).then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> response.json();</span><br><span class="line">&#125;).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Demo-6-fetch發送POST請求"><a href="#Demo-6-fetch發送POST請求" class="headerlink" title="Demo 6 / fetch發送POST請求"></a><font color=#777777>Demo 6 / fetch發送POST請求</font></h3><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> <span class="built_in">data</span> = <span class="literal">new</span> FormData();</span><br><span class="line"><span class="built_in">data</span>.append(<span class="string">'id'</span>,<span class="string">'5'</span>);</span><br><span class="line">fetch(<span class="string">"測試API產生出來的網址"</span>,&#123;</span><br><span class="line">    method:<span class="string">'POST'</span>,</span><br><span class="line">    body: <span class="built_in">data</span></span><br><span class="line">&#125;).then(response =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> response.json();</span><br><span class="line">&#125;).then(<span class="built_in">data</span> =&gt; &#123;</span><br><span class="line">    console.<span class="keyword">log</span>(<span class="built_in">data</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="上課心得"><a href="#上課心得" class="headerlink" title="上課心得"></a><font color=#0000FF>上課心得</font></h2><p>了解 Event Queue 的觀念，知道哪種程式碼類型在排隊處理的先後順序，這樣子寫code過程，比較知道哪段應該要先寫，<br>利用非同步來那它在背景處理，這樣才能比較有效率。<br>另外也重新複習 AJAX 的同步與非同步，同時新知道新底層 <code>fetch</code> 的 GET/POST 用法，要繼續多學習了 !<br>DEMO部分也有用到 VUE 的寫法介紹，但我沒有寫因為我還不會，期待之後學到 VUE ，再來回頭了解體驗了。</p>
+<h2 id="延伸參考資料"><a href="#延伸參考資料" class="headerlink" title="延伸參考資料"></a><font color=#999999>延伸參考資料</font></h2><p><a href="https://wcc723.github.io/javascript/2017/12/07/javascript-event-queue/" target="_blank" rel="noopener">鐵人賽：一次只能做一件事情的 JavaScript</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+              <a href="/tags/note/" rel="tag"># note</a>
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E5%A4%A7%E7%A5%9E%E4%BE%86%E5%85%AD%E8%A7%92/" rel="tag"># 大神來六角</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/hexo/20200210/1699950564/" rel="prev" title="hexo Blog頁面與Next主題">
+      <i class="fa fa-chevron-left"></i> hexo Blog頁面與Next主題
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-Queue-觀念重點"><span class="nav-number">1.</span> <span class="nav-text">Event Queue 觀念重點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript是單線程語言"><span class="nav-number">1.1.</span> <span class="nav-text">JavaScript是單線程語言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-Queue利用時間差"><span class="nav-number">1.2.</span> <span class="nav-text">Event Queue利用時間差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#計時器-AJAX等等不是單線程"><span class="nav-number">1.3.</span> <span class="nav-text">計時器,AJAX等等不是單線程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-Queue-Demo"><span class="nav-number">2.</span> <span class="nav-text">Event Queue Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo-1-單線程"><span class="nav-number">2.1.</span> <span class="nav-text">Demo 1 &#x2F; 單線程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo-2-非同步-單線程"><span class="nav-number">2.2.</span> <span class="nav-text">Demo 2 &#x2F; 非同步(單線程)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo-3-非同步-WebAPIs"><span class="nav-number">2.3.</span> <span class="nav-text">Demo 3 &#x2F; 非同步(WebAPIs)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AJAX-觀念重點"><span class="nav-number">3.</span> <span class="nav-text">AJAX 觀念重點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#請求回應方式"><span class="nav-number">3.1.</span> <span class="nav-text">請求回應方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#名稱由來"><span class="nav-number">3.2.</span> <span class="nav-text">名稱由來</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目前常見的底層-原生語法-等"><span class="nav-number">3.3.</span> <span class="nav-text">目前常見的底層 (原生語法..等)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#測試用API"><span class="nav-number">3.4.</span> <span class="nav-text">測試用API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AJAX-Demo"><span class="nav-number">4.</span> <span class="nav-text">AJAX Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo-1-非同步GET請求發送"><span class="nav-number">4.1.</span> <span class="nav-text">Demo 1 &#x2F; 非同步GET請求發送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo-2-同步GET請求發送"><span class="nav-number">4.2.</span> <span class="nav-text">Demo 2 &#x2F; 同步GET請求發送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo-3-非同步POST請求發送"><span class="nav-number">4.3.</span> <span class="nav-text">Demo 3 &#x2F; 非同步POST請求發送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo-4-同步POST請求發送"><span class="nav-number">4.4.</span> <span class="nav-text">Demo 4 &#x2F; 同步POST請求發送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo-5-fetch發送GET請求"><span class="nav-number">4.5.</span> <span class="nav-text">Demo 5 &#x2F; fetch發送GET請求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo-6-fetch發送POST請求"><span class="nav-number">4.6.</span> <span class="nav-text">Demo 6 &#x2F; fetch發送POST請求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上課心得"><span class="nav-number">5.</span> <span class="nav-text">上課心得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延伸參考資料"><span class="nav-number">6.</span> <span class="nav-text">延伸參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gary"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Gary</p>
+  <div class="site-description" itemprop="description">前端學習筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gary Note  - 蓋瑞筆記室</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+</html>
