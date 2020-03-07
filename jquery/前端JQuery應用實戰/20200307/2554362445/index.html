@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-gary.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-gary.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-gary.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://garyissogood.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#37c6c0","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="前端JQuery應用實戰筆記 1 - F2E介紹&amp;開發環境&amp;基礎觀念">
+<meta property="og:url" content="https://garyissogood.github.io/jquery/%E5%89%8D%E7%AB%AFJQuery%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0/20200307/2554362445/index.html">
+<meta property="og:site_name" content="Gary Note">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="article:published_time" content="2020-03-07T02:00:21.000Z">
+<meta property="article:modified_time" content="2020-03-07T01:44:34.319Z">
+<meta property="article:author" content="Gary">
+<meta property="article:tag" content="JQuery">
+<meta property="article:tag" content="前端JQuery應用實戰">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garyissogood.github.io/images/loading.gif">
+
+<link rel="canonical" href="https://garyissogood.github.io/jquery/%E5%89%8D%E7%AB%AFJQuery%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0/20200307/2554362445/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>前端JQuery應用實戰筆記 1 - F2E介紹&開發環境&基礎觀念 | Gary Note</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158633037-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158633037-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gary Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">蓋瑞的學習筆記室</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://garyissogood.github.io/jquery/%E5%89%8D%E7%AB%AFJQuery%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0/20200307/2554362445/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gary">
+      <meta itemprop="description" content="前端學習筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gary Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端JQuery應用實戰筆記 1 - F2E介紹&開發環境&基礎觀念
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-03-07 10:00:21 / 修改時間：09:44:34" itemprop="dateCreated datePublished" datetime="2020-03-07T10:00:21+08:00">2020-03-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/%E5%89%8D%E7%AB%AFJQuery%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">前端JQuery應用實戰</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/banner.jpg">
+<a id="more"></a>
+
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2019年底有幸可以參加偷米老師第三梯的「前端jQuery應用實戰」實體課程，如同老師課程介紹</p>
+<div class="note info">
+            <p>「前端 jQuery 應用實戰」這門課程是訓練<code>&quot;網頁設計師&quot; 升級為 &quot;前端工程師&quot;</code>為目的，目標能夠與後端工程師共同開發專案，並且能夠勝任前端資料串接的工作。本課程內有<code>大量的實戰會遇到的問題</code>，透過範例的原理分析進而轉換成程式碼的過程，讓你了解如何開發前端介面上的互動行為。</p>
+          </div>
+<p>因為本身還停留在網頁設計師等級，看到關鍵字就毫不猶豫報名，尤其報名費也很佛心價! 非常值得推薦 ~<br>雖說聽說以後可能會比較少用JQuery，但對於前端菜鳥啥都還不行，實在沒理由不多學習的，就算有替代性的，再學就是了! 多學總是好事，多學才有機會比較，只是多花點時間而已，但相信學到的都還是自己的，多努力就是了!</p>
+<h2 id="課程目錄"><a href="#課程目錄" class="headerlink" title="課程目錄"></a>課程目錄</h2><ul>
+<li>F2E 介紹 &amp; 開發環境</li>
+<li>AJAX 應用</li>
+<li>JSON 資料格式</li>
+<li>後端 API 串接</li>
+<li>跨網域存取</li>
+<li>正規表達式</li>
+<li>框架初體驗</li>
+</ul>
+<h2 id="F2E-介紹"><a href="#F2E-介紹" class="headerlink" title="F2E 介紹"></a>F2E 介紹</h2><h3 id="認識前端工程師"><a href="#認識前端工程師" class="headerlink" title="認識前端工程師"></a><font color=#41b883>認識前端工程師</font></h3><p>前端工程師的英文寫作 Front-End Engineer ( 業界簡稱 F2E )，是中大型企業都會有的職務，<br>是網頁設計師與後端工程師之間重要的溝通橋樑。<br><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/1-1.jpg"><br>以裝潢廚房來比喻的話 : </p>
+<ul>
+<li>網頁設計師 : 決定水龍頭的樣式及位置</li>
+<li>前端工程師 : 負責安裝水龍頭與水管</li>
+<li>後端工程師 : 提供水電瓦斯各種能源</li>
+</ul>
+<h3 id="如何從網頁設計師到前端工程師"><a href="#如何從網頁設計師到前端工程師" class="headerlink" title="如何從網頁設計師到前端工程師"></a><font color=#41b883>如何從網頁設計師到前端工程師</font></h3><p><strong>網頁設計師工作流程 :</strong><br><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/1-2.jpg"></p>
+<p><strong>前端工程師工作流程 :</strong><br><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/1-3.jpg"></p>
+<p><strong>兩者差異 :</strong></p>
+<ul>
+<li>前端工程師比較不會去修改視覺（除非本身很會，值得鼓勵！）</li>
+<li>要比網頁設計師更熟悉 HTML、CSS</li>
+<li>JavaScript 撰寫比重更多</li>
+<li>與後端工程師合作需要了解 HTTP 基礎觀念</li>
+</ul>
+<p><strong>前端工程師基本技能 :</strong></p>
+<ul>
+<li>建議至少會使用一種繪圖軟體 ( Photoshop、Illustrator 等 )</li>
+<li>網頁設計 HTML、CSS ( HTML5、CSS3 更佳 )</li>
+<li>網頁程式設計 JavaScript、JQuery，或其他前端 Framework 等</li>
+<li>資料交換格式 JSON、XML</li>
+<li>非同步傳輸 AJAX</li>
+<li>建議學習任一種後端程式語言 ( PHP、Nood.js 等 )</li>
+</ul>
+<p><strong>前端工程師必要知識 :</strong></p>
+<ul>
+<li>JavaScript 除錯技巧</li>
+<li>解決跨瀏覽器問題</li>
+<li>了解 HTTP Status Code 狀態碼</li>
+<li>了解 HTTP 傳輸協定基本概念</li>
+<li>優化 JavaScript 程式碼提升執行效能</li>
+</ul>
+<h3 id="前端學習地圖"><a href="#前端學習地圖" class="headerlink" title="前端學習地圖"></a><font color=#41b883>前端學習地圖</font></h3><ul>
+<li>2020 網頁開發人員學習地圖 <a href="https://github.com/kamranahmedse/developer-roadmap" target="_blank" rel="noopener">連結網址</a></li>
+<li>六角學院 - 2018 前端開發者學習地圖 <a href="https://www.hexschool.com/2018/04/16/2018-04-16-skill_tree/" target="_blank" rel="noopener">連結網址</a></li>
+<li>六角學院 - 邁向前端工程師之路 <a href="https://quip.com/D59vAxcgG8Qc" target="_blank" rel="noopener">連結網址</a></li>
+</ul>
+<h2 id="開發環境"><a href="#開發環境" class="headerlink" title="開發環境"></a>開發環境</h2><p>因為 Chrome 瀏覽器安全性限制，不允許 AJAX 直接存取電腦中的 JSON 檔案，<br>所以採用 Node.js 的 BrowserSync 架設開發伺服器來使用學習。</p>
+<ul>
+<li><p><strong>安裝 Node.js</strong><br>安裝 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a> ，檢查是否已經安裝過可輸入以下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v   //看 node.js 版本編號</span><br><span class="line">npm -v    //看 npm 版本編號</span><br></pre></td></tr></table></figure>
+<p>有出現版本編號表示安裝成功</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ node -v</span><br><span class="line">v10.16.3</span><br><span class="line"></span><br><span class="line">$ npm -v</span><br><span class="line">6.9.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用 Visual Studio Code</strong><br>Visual Studio Code 是現在流行非常好用的編輯器，可同時支援 Mac 跟 Windows，<br>本身擁有很多擴充套件，推薦使用 !<br>下載 <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a></p>
+</li>
+<li><p><strong>使用 BrowserSync 開發伺服器</strong><br>使用 BrowserSync 優點是可以儲存後自動重新載入網頁，也支援多瀏覽器同步瀏覽功能，可提升開發效率 !</p>
+<ul>
+<li><strong>安裝</strong><br>在 Visual Studio Code 內的終端機上執行以下指令安裝，這會將 BrowserSync 套件裝在全域環境中。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> -g browser-<span class="keyword">sync</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>執行</strong><br>在終端機中到要執行專案的資料夾下，執行以下指令 <code>browser-sync start --server</code><br>會在預設的網域 <code>http://localhost:3000</code> 開啟網頁。<br>另外用以下指令 : <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">browser-sync start <span class="params">--server</span> <span class="params">--files=</span><span class="string">"*"</span></span><br></pre></td></tr></table></figure>
+加上 <code>--files=&quot;*&quot;</code> 參數，表示在開啟期間會持續監看目錄下的檔案是否變更，<br>有變更會自動刷新網頁，省了手動更新的動作。</li>
+<li><strong>參考文章</strong><br><a href="https://poychang.github.io/how-to-use-bowser-sync/" target="_blank" rel="noopener">如何使用 BrowserSync 啟動開發用網頁伺服器</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="JavaScript-和-JQuery-基礎觀念"><a href="#JavaScript-和-JQuery-基礎觀念" class="headerlink" title="JavaScript 和 JQuery 基礎觀念"></a>JavaScript 和 JQuery 基礎觀念</h2><ol>
+<li>函式分為兩種<ul>
+<li><code>具名函式</code> : 可自定義函式名稱，使用函式名稱呼叫函式。 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">one</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><code>匿名函式</code> : 沒有函式名稱，常用於事件 ( event ) 、 回呼 ( callback )，無法單獨存在。 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>JavaScript 在不同位置宣告變數，作用範圍也會不同。<ul>
+<li>範例 1 : <figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">num</span><span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">  var a = 2;</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">num</span><span class="params">()</span>;</span></span><br><span class="line">console.log(a);</span><br><span class="line"></span><br><span class="line"><span class="comment">// a = 1</span></span><br></pre></td></tr></table></figure></li>
+<li>範例 2 : 變數直接被指定。 <figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">num</span><span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">  a = 2;</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">num</span><span class="params">()</span>;</span></span><br><span class="line">console.log(a);</span><br><span class="line"></span><br><span class="line"><span class="comment">// a = 2</span></span><br></pre></td></tr></table></figure></li>
+<li>範例 3 : 函式裡的參數，可視為宣告。 <figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">num</span><span class="params">(a)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">  a = 2;</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">num</span><span class="params">(a)</span>;</span></span><br><span class="line">console.log(a);</span><br><span class="line"></span><br><span class="line"><span class="comment">// a = 1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>JQuery 選取器必須在 DOM 元素下載完成後才會被選取到，所以建議將 JQuery 選取器寫入 JQuery ready 事件裡頭。<br>JQuery ready 完整寫法 :<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="comment">//code</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+JQuery ready 簡化寫法 :<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;   <span class="comment">//前方$字號就可以代表 $(document).ready()</span></span><br><span class="line">   <span class="comment">//code</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JQuery/" rel="tag"># JQuery</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AFJQuery%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0/" rel="tag"># 前端JQuery應用實戰</a>
+              <a href="/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/javascript/note/20200225/4011991955/" rel="prev" title="AJAX非同步大解密 (筆記)">
+      <i class="fa fa-chevron-left"></i> AJAX非同步大解密 (筆記)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#課程目錄"><span class="nav-number">2.</span> <span class="nav-text">課程目錄</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F2E-介紹"><span class="nav-number">3.</span> <span class="nav-text">F2E 介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#認識前端工程師"><span class="nav-number">3.1.</span> <span class="nav-text">認識前端工程師</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何從網頁設計師到前端工程師"><span class="nav-number">3.2.</span> <span class="nav-text">如何從網頁設計師到前端工程師</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端學習地圖"><span class="nav-number">3.3.</span> <span class="nav-text">前端學習地圖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#開發環境"><span class="nav-number">4.</span> <span class="nav-text">開發環境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-和-JQuery-基礎觀念"><span class="nav-number">5.</span> <span class="nav-text">JavaScript 和 JQuery 基礎觀念</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gary"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Gary</p>
+  <div class="site-description" itemprop="description">前端學習筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gary Note  - 蓋瑞筆記室</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+</html>
