@@ -58,7 +58,7 @@
 <meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
 <meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
 <meta property="article:published_time" content="2020-03-15T14:00:21.000Z">
-<meta property="article:modified_time" content="2020-03-15T15:34:30.258Z">
+<meta property="article:modified_time" content="2020-03-15T15:38:16.601Z">
 <meta property="article:author" content="Gary">
 <meta property="article:tag" content="w3HexSchool">
 <meta property="article:tag" content="JQuery">
@@ -248,7 +248,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-03-15 22:00:21 / 修改時間：23:34:30" itemprop="dateCreated datePublished" datetime="2020-03-15T22:00:21+08:00">2020-03-15</time>
+              <time title="創建時間：2020-03-15 22:00:21 / 修改時間：23:38:16" itemprop="dateCreated datePublished" datetime="2020-03-15T22:00:21+08:00">2020-03-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -341,7 +341,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">".menu"</span>).load(<span class="string">"menu.html"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;           <span class="comment">// 動態載入menu.html</span></span><br><span class="line">    <span class="comment">//替目前頁面選項加上選取後效果</span></span><br><span class="line">    <span class="keyword">var</span> url = location.href;                           <span class="comment">// 宣告url變數 = 目前瀏覽器網址</span></span><br><span class="line">    <span class="keyword">var</span> href = url.substr(url.lastIndexOf(<span class="string">"/"</span>) + <span class="number">1</span>);   <span class="comment">// 宣告href變數 = 擷取 url 字元</span></span><br><span class="line">    $(<span class="string">"a[href='"</span> + (href || <span class="string">"index.html"</span>) + <span class="string">"']"</span>).addClass(<span class="string">"selected"</span>);  </span><br><span class="line">    <span class="comment">//a元素判斷擷取的字元是否有效，無效就選是首頁的a元素，再套上CSS效果</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <div class="note success">
-            <ul><li>location.href 取得目前瀏覽器網址</li><li>substr 與 lastIndexOf 方法取得字串，<a href="https://garyissogood.github.io/javascript/note/20200312/1781274447/">參考筆記</a></li><li>使用短路邏輯判斷</li></ul>
+            <ul><li>location.href 取得目前瀏覽器網址</li><li>substr 與 lastIndexOf 方法取得字串，<a href="https://garyissogood.github.io/javascript/20200315/1781274447/">參考筆記</a></li><li>使用短路邏輯判斷</li></ul>
           </div>
 
 <div class="note info">
@@ -360,7 +360,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">".menu&gt;a"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    $(<span class="string">".menu&gt;a.selected"</span>).removeClass();</span><br><span class="line">    $(<span class="string">".content"</span>).load($(<span class="keyword">this</span>).addClass(<span class="string">"selected"</span>).attr(<span class="string">"href"</span>));</span><br><span class="line">    e.preventDefault();</span><br><span class="line">  &#125;).first().click();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <div class="note success">
-            <ul><li><code>attr</code> 方法取得選取器中的網址，<a href="https://garyissogood.github.io/javascript/note/20200312/1781274447/">參考筆記</a></li><li><code>this</code> 表示目前選取器中被click的那個 DOM 物件。</li><li><code>$(this)</code> 可以將 DOM 物件轉換成 jQuery 物件。</li><li><code>e.preventDefault</code> 方法可以停止超連結預設動作(包含表單提交)。</li><li><code>e.stopPropagation</code> 方法可以停止事件往上層傳遞(<a href="https://ithelp.ithome.com.tw/articles/10222679" target="_blank" rel="noopener">事件冒泡參考筆記</a>)。</li><li><code>first</code> 方法從選取器中篩選出第一個選取器。</li><li><code>click</code> 方法若不帶入 function 則表示會立即觸發 click 事件。</li></ul>
+            <ul><li><code>attr</code> 方法取得選取器中的網址，<a href="https://garyissogood.github.io/jquery/20200315/2986078976/">參考筆記</a></li><li><code>this</code> 表示目前選取器中被click的那個 DOM 物件。</li><li><code>$(this)</code> 可以將 DOM 物件轉換成 jQuery 物件。</li><li><code>e.preventDefault</code> 方法可以停止超連結預設動作(包含表單提交)。</li><li><code>e.stopPropagation</code> 方法可以停止事件往上層傳遞(<a href="https://ithelp.ithome.com.tw/articles/10222679" target="_blank" rel="noopener">事件冒泡參考筆記</a>)。</li><li><code>first</code> 方法從選取器中篩選出第一個選取器。</li><li><code>click</code> 方法若不帶入 function 則表示會立即觸發 click 事件。</li></ul>
           </div>
 
 <hr>
