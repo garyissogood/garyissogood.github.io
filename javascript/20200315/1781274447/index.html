@@ -49,21 +49,20 @@
   };
 </script>
 
-  <meta name="description" content="前端學習筆記">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Gary Note">
-<meta property="og:url" content="https://garyissogood.github.io/categories/javascript/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="substr &#x2F; substring 和 indexOf &#x2F; lastIndexOf 等擷取字串用法">
+<meta property="og:url" content="https://garyissogood.github.io/javascript/20200315/1781274447/index.html">
 <meta property="og:site_name" content="Gary Note">
-<meta property="og:description" content="前端學習筆記">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="article:published_time" content="2020-03-15T02:48:59.000Z">
+<meta property="article:modified_time" content="2020-03-15T15:28:01.241Z">
 <meta property="article:author" content="Gary">
-<meta property="article:tag" content="學習">
-<meta property="article:tag" content="前端">
-<meta property="article:tag" content="f2e">
-<meta property="article:tag" content="部落格">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garyissogood.github.io/images/loading.gif">
 
-<link rel="canonical" href="https://garyissogood.github.io/categories/javascript/">
+<link rel="canonical" href="https://garyissogood.github.io/javascript/20200315/1781274447/">
 
 
 <script id="page-configurations">
@@ -71,11 +70,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>分類: JavaScript | Gary Note</title>
+  <title>substr / substring 和 indexOf / lastIndexOf 等擷取字串用法 | Gary Note</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158633037-1"></script>
     <script>
@@ -216,70 +215,117 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">JavaScript
-          <small>分類</small>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://garyissogood.github.io/javascript/20200315/1781274447/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gary">
+      <meta itemprop="description" content="前端學習筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gary Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          substr / substring 和 indexOf / lastIndexOf 等擷取字串用法
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-03-15 10:48:59 / 修改時間：23:28:01" itemprop="dateCreated datePublished" datetime="2020-03-15T10:48:59+08:00">2020-03-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
-    </div>
+        <img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/banner/bn-note4.jpg">
+<a id="more"></a>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-15T10:48:59+08:00"
-              content="2020-03-15">
-          03-15
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/javascript/20200315/1781274447/" itemprop="url">
-            <span itemprop="name">substr / substring 和 indexOf / lastIndexOf 等擷取字串用法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-02-25T21:18:33+08:00"
-              content="2020-02-25">
-          02-25
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/javascript/note/20200225/4011991955/" itemprop="url">
-            <span itemprop="name">AJAX非同步大解密 (筆記)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
+<p>JavaScript 中使用 substr、substring、indexOf、lastIndexOf 等擷取字串方式。</p>
+<h1 id="substr"><a href="#substr" class="headerlink" title="substr"></a>substr</h1><p><code>substr ( start , length )</code> 表示從 start 位置開始，擷取 length 長度的字串，數值從 0 開始算。<br>( 第二參數 length 可忽略，就會從 start 位置開始擷取到字串結束 )</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url=<span class="string">"css/style.css"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(url.substr(<span class="number">4</span>,<span class="number">5</span>));</span><br></pre></td></tr></table></figure>
+<p>得到值為：style</p>
+<h1 id="substring"><a href="#substring" class="headerlink" title="substring"></a>substring</h1><p><code>substring ( start , end )</code> 表示從 start 到 end 之間的字串，包括 start 位置的字元但是不包括 end 位置的字元。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url=<span class="string">"css/style.css"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(url.substring(<span class="number">0</span>,<span class="number">3</span>));</span><br></pre></td></tr></table></figure>
+<p>得到值為：css</p>
+<h1 id="indexOF"><a href="#indexOF" class="headerlink" title="indexOF"></a>indexOF</h1><p><code>indexOf()</code> 方法返回某個指定的字串值在字串中首次出現的位置<font color=#41b883>（從左向右）</font>。沒有匹配的則返回 -1，否則返回首次出現位置的字串的下標值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url=<span class="string">"css/style.css"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(url.indexOf(<span class="string">'X'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(url.indexOf(<span class="string">'S'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(url.indexOf(<span class="string">'y'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(url.indexOf(<span class="string">'/'</span>));</span><br></pre></td></tr></table></figure>
+<p>得到值依次為：-1、1、6、3</p>
+<h1 id="lastIndexOf"><a href="#lastIndexOf" class="headerlink" title="lastIndexOf"></a>lastIndexOf</h1><p><code>lastIndexOf()</code> 方法返回<font color=#41b883>從右向左</font>出現某個字元或字串的首個字元索引值（與indexOf相反）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url=<span class="string">"css/style.css"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(url.lastIndexOf(<span class="string">'c'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(url.lastIndexOf(<span class="string">'s'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(url.lastIndexOf(<span class="string">'/'</span>));</span><br></pre></td></tr></table></figure>
+<p>得到值依次為：10、12、3</p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/jquery/jquery-application/20200307/2554362445/" rel="prev" title="前端JQuery應用實戰筆記 1 - F2E介紹&開發環境&基礎觀念">
+      <i class="fa fa-chevron-left"></i> 前端JQuery應用實戰筆記 1 - F2E介紹&開發環境&基礎觀念
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/jquery/20200315/2986078976/" rel="next" title="attr() 抓取圖片的屬性以及改變圖片的路徑">
+      attr() 抓取圖片的屬性以及改變圖片的路徑 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -330,6 +376,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#substr"><span class="nav-number">1.</span> <span class="nav-text">substr</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#substring"><span class="nav-number">2.</span> <span class="nav-text">substring</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#indexOF"><span class="nav-number">3.</span> <span class="nav-text">indexOF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lastIndexOf"><span class="nav-number">4.</span> <span class="nav-text">lastIndexOf</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
