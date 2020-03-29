@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-gary.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-gary.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-gary.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://garyissogood.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#37c6c0","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="前端JQuery應用實戰筆記 2 - AJAX 應用 (下)">
+<meta property="og:url" content="https://garyissogood.github.io/jquery/jquery-application/20200329/2398573071/index.html">
+<meta property="og:site_name" content="Gary Note">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="article:published_time" content="2020-03-29T02:00:21.000Z">
+<meta property="article:modified_time" content="2020-03-29T15:34:19.980Z">
+<meta property="article:author" content="Gary">
+<meta property="article:tag" content="w3HexSchool">
+<meta property="article:tag" content="JQuery">
+<meta property="article:tag" content="前端JQuery應用實戰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garyissogood.github.io/images/loading.gif">
+
+<link rel="canonical" href="https://garyissogood.github.io/jquery/jquery-application/20200329/2398573071/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>前端JQuery應用實戰筆記 2 - AJAX 應用 (下) | Gary Note</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158633037-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158633037-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gary Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">蓋瑞的學習筆記室</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://garyissogood.github.io/jquery/jquery-application/20200329/2398573071/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gary">
+      <meta itemprop="description" content="前端學習筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gary Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端JQuery應用實戰筆記 2 - AJAX 應用 (下)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-03-29 10:00:21 / 修改時間：23:34:19" itemprop="dateCreated datePublished" datetime="2020-03-29T10:00:21+08:00">2020-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/jquery-application/" itemprop="url" rel="index">
+                    <span itemprop="name">前端JQuery應用實戰</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/banner2-2.jpg">
+<a id="more"></a>
+
+
+<h3 id="ex-9-選單事件·多重事件綁定"><a href="#ex-9-選單事件·多重事件綁定" class="headerlink" title="ex.9 選單事件·多重事件綁定"></a>ex.9 選單事件·多重事件綁定</h3><p>一般選單想要有移入移出效果，利用更換中英文也是其中一種效果。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/ajax/09/" target="_blank" rel="noopener">ex.9 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"menu"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">  這是文件內容</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>menu.html</strong>  加上 <code>data-*</code> 屬性</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">data-english</span>=<span class="string">"First"</span>&gt;</span>第一<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">data-english</span>=<span class="string">"Second"</span>&gt;</span>第二<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">data-english</span>=<span class="string">"Third"</span>&gt;</span>第三<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">data-english</span>=<span class="string">"Fourth"</span>&gt;</span>第四<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">data-english</span>=<span class="string">"Fifth"</span>&gt;</span>第五<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">"#menu"</span>).load(<span class="string">"menu.html"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;   </span><br><span class="line">    $(<span class="keyword">this</span>).find(<span class="string">"a"</span>).on(<span class="string">"mouseenter mouseleave"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;     <span class="comment">//用on方法綁定滑入滑出事件，中間空格隔開事件</span></span><br><span class="line">      <span class="keyword">var</span> temp = $(<span class="keyword">this</span>).text();                                    <span class="comment">//用.text()取出this裡的文字</span></span><br><span class="line">      $(<span class="keyword">this</span>).text($(<span class="keyword">this</span>).data(<span class="string">"english"</span>));                        <span class="comment">//抓取出data-*裡的文字</span></span><br><span class="line">      $(<span class="keyword">this</span>).data(<span class="string">"english"</span>, temp);                                <span class="comment">//用.data()替換data-*的屬性內容</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="note default">
+            <ul><li>mouseenter 跟 mouseleave 本來是兩個事件，使用 <code>on</code> 合併成一個事件處理。</li><li>var temp = $(this).text(); 把目前選單擷取中文暫存到 temp 變數裡。</li><li>$(this).text($(this).data(“english”));  把目前的選單文字換成 data-english 裡的英文字。</li><li>$(this).data(“english”, temp); 把原本存在 temp 變數裡的中文字，替換到 data-english 裡面。</li><li>滑入執行一次替換，滑出又在執行一次，用<code>on</code>就可以合併一次執行</li></ul>
+          </div>
+
+<div class="note success">
+            <ul><li>若多個事件執行相同 function，可使用 <code>on</code> 方法來綁定多個事件。</li><li><code>data</code> 方法可以取得或設定 HTML5 中的 <code>data-*</code> 屬性內容。</li><li><code>find</code> 方法可以從原本選取器底下尋找元素並回傳新選取器。</li></ul>
+          </div>
+<div class="note info">
+            <p><code>text()</code> 取出文字 / <code>text(e)</code> 寫進參數。<br><code>data</code> 取值比較快，效能快 / <code>data-*</code> 會把值寫進畫面，效能慢又大。</p>
+          </div>
+
+<hr>
+<h3 id="ex-10-選單事件-多重事件判断"><a href="#ex-10-選單事件-多重事件判断" class="headerlink" title="ex.10 選單事件-多重事件判断"></a>ex.10 選單事件-多重事件判断</h3><p>用來判斷移入移出效果及點擊事件。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/ajax/10/" target="_blank" rel="noopener">ex.10 練習</a></p>
+<p><strong>index.html / menu.html 同 ex.9</strong>  </p>
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">"#menu"</span>).load(<span class="string">"menu.html"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="keyword">this</span>).find(<span class="string">"a"</span>).on(<span class="string">"mouseenter mouseleave click"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;  <span class="comment">//用on方法綁定滑入滑出點擊事件</span></span><br><span class="line">      <span class="keyword">if</span> (e.type != <span class="string">"click"</span>) &#123;                                          <span class="comment">//用e.type判斷，!= 不等於意思</span></span><br><span class="line">        <span class="keyword">var</span> temp = $(<span class="keyword">this</span>).text();                                      <span class="comment">//滑入滑出事件</span></span><br><span class="line">        $(<span class="keyword">this</span>).text($(<span class="keyword">this</span>).data(<span class="string">"english"</span>));</span><br><span class="line">        $(<span class="keyword">this</span>).data(<span class="string">"english"</span>, temp);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $(<span class="string">".content"</span>).load($(<span class="keyword">this</span>).attr(<span class="string">"href"</span>));                        <span class="comment">//點擊事件</span></span><br><span class="line">        e.preventDefault();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="note default">
+            <ul><li>if (e.type != “click”)  e.type是目前的狀態，用 <code>!=</code> 不等於 click 事件。</li><li>不等於 click 事件也就是 ex.9 練習的滑入滑出動作。</li><li>else 就是點擊後要處理的事件，也就是點擊後連結頁面去。</li><li>e.preventDefault(); 讓原本 a 的超連結取消作用</li></ul>
+          </div>
+
+
+<div class="note success">
+            <ul><li>大部分 function 都有回傳參數，可提供事件詳細資訊或操作方法。</li><li><code>e.type</code> 方法可以判斷目前事件是由哪一個發生。</li></ul>
+          </div>
+
+
+<hr>
+<h3 id="ex-11-選單事件-使用-on-註冊事件"><a href="#ex-11-選單事件-使用-on-註冊事件" class="headerlink" title="ex.11 選單事件-使用 on 註冊事件"></a>ex.11 選單事件-使用 on 註冊事件</h3><p>用on來綁定事件，用於註冊之後產生的元素身上。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/ajax/11/" target="_blank" rel="noopener">ex.11 練習</a></p>
+<p><strong>index.html / menu.html 同 ex.9</strong>  </p>
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">"#menu"</span>).on(<span class="string">"mouseenter mouseleave click"</span>, <span class="string">"a"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123; <span class="comment">//用on來綁定事件，用於之後產生a元素身上 </span></span><br><span class="line">        <span class="keyword">if</span> (e.type != <span class="string">"click"</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> temp = $(<span class="keyword">this</span>).text();</span><br><span class="line">            $(<span class="keyword">this</span>).text($(<span class="keyword">this</span>).data(<span class="string">"english"</span>));</span><br><span class="line">            $(<span class="keyword">this</span>).data(<span class="string">"english"</span>, temp);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $(<span class="string">".content"</span>).load($(<span class="keyword">this</span>).attr(<span class="string">"href"</span>));</span><br><span class="line">            e.preventDefault();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    $(<span class="string">"#menu"</span>).load(<span class="string">"menu.html"</span>);   <span class="comment">//load事件無法放入function，如套件之類，才會移出先綁定事件  </span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="note default">
+            <ul><li>$(“#menu”).on(“mouseenter mouseleave click”, “a”, function(e)   使用 <code>on</code> 預先綁定 a。</li><li>$(“#menu”).load(“menu.html”); 把等於 <code>load</code> 事件移出先綁定事件，獨立操作。</li></ul>
+          </div>
+
+<div class="note success">
+            <ul><li>選取器綁定事件必須要選取目前存在元素。</li><li>使用 <code>on</code> 方法傳入三個參數來綁定之後才會產生元素的事件。</li></ul>
+          </div>
+<div class="note info">
+            <p>非同步不一定是由上往下順序處理程序，處理較費時功能的幾乎是非同步操作。<br>等待完成後才會執行回呼函式 ( callback function )。</p><p>同步非同步參考筆記<br><a href="https://garyissogood.github.io/javascript/note/20200225/4011991955/">AJAX非同步大解密 (筆記)</a><br><a href="https://ithelp.ithome.com.tw/articles/10209328" target="_blank" rel="noopener">sync 同步 &amp; async 非同步</a></p>
+          </div>
+
+
+<hr>
+<h3 id="ex-12-選單事件-使用-off-移除事件"><a href="#ex-12-選單事件-使用-off-移除事件" class="headerlink" title="ex.12 選單事件-使用 off 移除事件"></a>ex.12 選單事件-使用 off 移除事件</h3><p>用 off 來移除綁定事件，用會員勾選同意與否來判斷是否要移除事件。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/ajax/12/" target="_blank" rel="noopener">ex.12 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"outbox"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>會員註冊<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">      為了確保會員之個人資料、隱私~~略：<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">      1. 蒐集之目的僅在於提供六角學院相關訊息~~略。<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">      2. 六角學院於網站內蒐集的個人資料包括會員之姓名、電子郵件等資訊。<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"checkbox"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"checkbox"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"checkbox"</span>&gt;</span>我已閱讀並接受<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"register"</span> <span class="attr">class</span>=<span class="string">"a_btn"</span>&gt;</span>確認<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">"#checkbox"</span>).change(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;         <span class="comment">//假如有change事件</span></span><br><span class="line">    <span class="keyword">if</span> ($(<span class="keyword">this</span>).is(<span class="string">":checked"</span>)) &#123;             <span class="comment">//is判斷是否跟前面選的一樣， </span></span><br><span class="line">      $(<span class="string">"#register"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        location.href = <span class="string">"ok.html"</span>;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;                                 </span><br><span class="line">      $(<span class="string">"#register"</span>).off(<span class="string">"click"</span>);            <span class="comment">//用off移除click事件 </span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;).change();                                <span class="comment">//立即重新觸發</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="note default">
+            <ul><li>$(“#checkbox”).change(function ()   表單使用 <code>change</code> 判斷狀態，有無勾選。</li><li>if ($(this).is(“:checked”)) 使用 <code>is</code> 檢查 this 本身的選擇器有無等於 :checked，有就執行勾選事件。</li><li>$(“#register”).off(“click”); 在沒勾選時，用 <code>off</code> 移除按鈕的 click 事件</li><li>.change(); 因為瀏覽器本身會記憶表單，回上頁都會記錄，按鈕本身狀態會記錄，但程式並沒有紀錄，所以必須每次載入強迫重新使用。</li></ul>
+          </div>
+
+<div class="note success">
+            <ul><li>使用 <code>off</code> 方法可以移除綁定事件，<code>off()</code>會移除全部同樣事件。</li><li>若只想移除某個 click 事件，綁定事件的時候可以設定事件命名空間，例:click.name。</li><li>change 方法若不帶入 function 則表示立即觸發該事件。</li></ul>
+          </div>
+
+
+
+<hr>
+<div class="note info">
+            <h3 id="概述-jQuery版本差異"><a href="#概述-jQuery版本差異" class="headerlink" title="概述:jQuery版本差異"></a>概述:jQuery版本差異</h3><p>目前jQuery 的版本區分為三種:</p><ul><li>1.x 仍支援 IE6/7/8 版瀏覧器，目前最新版本 1.12.4。(32.3KB)<br>若須支援 IE 舊版瀏覧器，請選擇這個版本· </li><li>2.x 不支援 IE6/7/8 版瀏覽器，目前最新版本 2.2.4。(28.7KB)<br>若不須考慮 IE 舊版瀏覧器，原始檔案將會更小。</li><li>3.x 不支援 IE6/7/8 版瀏覧器，目前最新版本 3.4.1。(29.2KB)<br>部分功能調整及修正，未來新功能都會在此版本擴充。</li></ul><p><strong>※ 輕量化 jQuery : Zepto.js</strong><br>只保留核心，事件、Ajax、表單、IE10+支援，目前最新版本 1.2.0。(9.6KB)</p>
+          </div>
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+              <a href="/tags/JQuery/" rel="tag"># JQuery</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AFJQuery%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0/" rel="tag"># 前端JQuery應用實戰</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/jquery/jquery-application/20200315/2393945142/" rel="prev" title="前端JQuery應用實戰筆記 2 - AJAX 應用 (上)">
+      <i class="fa fa-chevron-left"></i> 前端JQuery應用實戰筆記 2 - AJAX 應用 (上)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-9-選單事件·多重事件綁定"><span class="nav-number">1.</span> <span class="nav-text">ex.9 選單事件·多重事件綁定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-10-選單事件-多重事件判断"><span class="nav-number">2.</span> <span class="nav-text">ex.10 選單事件-多重事件判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-11-選單事件-使用-on-註冊事件"><span class="nav-number">3.</span> <span class="nav-text">ex.11 選單事件-使用 on 註冊事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-12-選單事件-使用-off-移除事件"><span class="nav-number">4.</span> <span class="nav-text">ex.12 選單事件-使用 off 移除事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概述-jQuery版本差異"><span class="nav-number">5.</span> <span class="nav-text">概述:jQuery版本差異</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gary"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Gary</p>
+  <div class="site-description" itemprop="description">前端學習筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gary Note  - 蓋瑞筆記室</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+</html>
