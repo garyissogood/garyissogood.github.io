@@ -49,15 +49,13 @@
   };
 </script>
 
-  <meta name="description" content="Progress bar for NexT  Installation  If you want to use the CDN instead of clone this repo, please jump to the Step 3.  Step 1 &amp;rarr; Go to NexT dir  Change dir to NexT directory. There must be layout">
+  <meta name="description" content="前端學習筆記">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Gary Note">
-<meta property="og:url" content="https://garyissogood.github.io/lib/pace/README.html">
+<meta property="og:url" content="https://garyissogood.github.io/page/2/index.html">
 <meta property="og:site_name" content="Gary Note">
-<meta property="og:description" content="Progress bar for NexT  Installation  If you want to use the CDN instead of clone this repo, please jump to the Step 3.  Step 1 &amp;rarr; Go to NexT dir  Change dir to NexT directory. There must be layout">
+<meta property="og:description" content="前端學習筆記">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-02-21T14:43:27.044Z">
-<meta property="article:modified_time" content="2020-02-19T06:33:11.160Z">
 <meta property="article:author" content="Gary">
 <meta property="article:tag" content="學習">
 <meta property="article:tag" content="前端">
@@ -65,20 +63,19 @@
 <meta property="article:tag" content="部落格">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://garyissogood.github.io/lib/pace/README">
+<link rel="canonical" href="https://garyissogood.github.io/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
+    isHome: true,
     isPost: false
   };
 </script>
 
-  <title> | Gary Note
-  </title>
+  <title>Gary Note</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158633037-1"></script>
     <script>
@@ -215,86 +212,128 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
           <div class="content">
             
 
   <div class="posts-expand">
-    
-    
-    
-    <div class="post-block" lang="zh-TW">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">
-</h1>
-
-<div class="post-meta">
+        
   
-  <ul class="breadcrumb">
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://garyissogood.github.io/front-end/20200208/3972744870/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gary">
+      <meta itemprop="description" content="前端學習筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gary Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
           
-            <li><a href="/lib/">LIB</a></li>
-            <li><a href="/lib/pace/">PACE</a></li>
-            <li>README</li>
+            <a href="/front-end/20200208/3972744870/" class="post-title-link" itemprop="url">Markdown常用語法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2020-02-08 22:09:05" itemprop="dateCreated datePublished" datetime="2020-02-08T22:09:05+08:00">2020-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2020-02-21 17:20:08" itemprop="dateModified" datetime="2020-02-21T17:20:08+08:00">2020-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/front-end/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+            </span>
+
           
-  </ul>
 
-</div>
+        </div>
+      </header>
 
-</header>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      
-      
-      <div class="post-body">
-          <h1 align="center"><a href="https://github.com/HubSpot/pace" target="_blank" rel="noopener">Progress bar</a> for <a href="https://github.com/theme-next" target="_blank" rel="noopener">NexT</a></h1>
-
-<h1 align="center">Installation</h1>
-
-<h2>If you want to use the CDN instead of clone this repo, please jump to the Step 3.</h2>
-
-<h2 align="center">Step 1 &rarr; Go to NexT dir</h2>
-
-<p>Change dir to <strong>NexT</strong> directory. There must be <code>layout</code>, <code>source</code>, <code>languages</code> and other directories:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> themes/next</span><br><span class="line">$ ls</span><br><span class="line">_config.yml  crowdin.yml  docs  gulpfile.js  languages  layout  LICENSE.md  package.json  README.md  scripts  <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
-
-<h2 align="center">Step 2 &rarr; Get module</h2>
-
-<p>Install module to <code>source/lib</code> directory:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/theme-next-pace <span class="built_in">source</span>/lib/pace</span><br></pre></td></tr></table></figure>
-
-<h2 align="center">Step 3 &rarr; Set it up</h2>
-
-<p>Enable module in <strong>NexT</strong> <code>_config.yml</code> file and select your theme:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pace:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Themes list:</span></span><br><span class="line">  <span class="comment"># big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple</span></span><br><span class="line">  <span class="comment"># corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">minimal</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>And, if you wants to use the CDN, then need to set:</strong> (you also need to find your corresponding theme css link in <a href="https://www.jsdelivr.com/package/npm/pace-js?path=themes" target="_blank" rel="noopener">jsdelivr</a>)</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">vendors:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">pace:</span> <span class="string">//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js</span></span><br><span class="line">  <span class="attr">pace_css:</span> <span class="string">//cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css</span></span><br></pre></td></tr></table></figure>
-
-<h1 align="center">Update</h1>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> themes/next/<span class="built_in">source</span>/lib/pace</span><br><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
-
-      </div>
-      
-      
+          <table>
+<thead>
+<tr>
+<th>語法</th>
+<th align="left">預覽</th>
+<th align="right">語法</th>
+<th align="center">預覽</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>*斜體*</code></td>
+<td align="left"><em>斜體</em></td>
+<td align="right"><code>~~刪除線~~</code></td>
+<td align="center"><del>刪除線</del></td>
+</tr>
+<tr>
+<td><code>**粗體**</code></td>
+<td align="left"><strong>粗體</strong></td>
+<td align="right"><code>&lt;u&gt;底線&lt;u&gt;</code></td>
+<td align="center"><u>底線<u></td>
+</tr>
+<tr>
+<td><code>***粗斜體***</code></td>
+<td align="left"><strong><em>粗斜體</em></strong></td>
+<td align="right">，、。</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/front-end/20200208/3972744870/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
-    
-  <ul class="breadcrumb">
-          
-            <li><a href="/lib/">LIB</a></li>
-            <li><a href="/lib/pace/">PACE</a></li>
-            <li>README</li>
-          
-  </ul>
 
     
     
     
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -345,7 +384,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Progress bar for NexT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text">If you want to use the CDN instead of clone this repo, please jump to the Step 3.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.2.</span> <span class="nav-text">Step 1 &amp;rarr; Go to NexT dir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.3.</span> <span class="nav-text">Step 2 &amp;rarr; Get module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.4.</span> <span class="nav-text">Step 3 &amp;rarr; Set it up</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">Update</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
