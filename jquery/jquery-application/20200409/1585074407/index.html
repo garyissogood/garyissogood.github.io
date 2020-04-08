@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-gary.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-gary.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-gary.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://garyissogood.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#37c6c0","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="前端JQuery應用實戰筆記 3 - 開發人員工具 (上)">
+<meta property="og:url" content="https://garyissogood.github.io/jquery/jquery-application/20200409/1585074407/index.html">
+<meta property="og:site_name" content="Gary Note">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="article:published_time" content="2020-04-08T23:05:21.000Z">
+<meta property="article:modified_time" content="2020-04-08T23:56:37.023Z">
+<meta property="article:author" content="Gary">
+<meta property="article:tag" content="JQuery">
+<meta property="article:tag" content="w3HexSchool">
+<meta property="article:tag" content="前端JQuery應用實戰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garyissogood.github.io/images/loading.gif">
+
+<link rel="canonical" href="https://garyissogood.github.io/jquery/jquery-application/20200409/1585074407/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>前端JQuery應用實戰筆記 3 - 開發人員工具 (上) | Gary Note</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158633037-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158633037-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gary Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">蓋瑞的學習筆記室</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://garyissogood.github.io/jquery/jquery-application/20200409/1585074407/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gary">
+      <meta itemprop="description" content="前端學習筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gary Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端JQuery應用實戰筆記 3 - 開發人員工具 (上)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-04-09 07:05:21 / 修改時間：07:56:37" itemprop="dateCreated datePublished" datetime="2020-04-09T07:05:21+08:00">2020-04-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/jquery-application/" itemprop="url" rel="index">
+                    <span itemprop="name">前端JQuery應用實戰</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/banner3-1.jpg">
+<a id="more"></a>
+
+
+<h1 id="開發人員工具除錯技巧"><a href="#開發人員工具除錯技巧" class="headerlink" title="開發人員工具除錯技巧"></a>開發人員工具除錯技巧</h1><p>再開發過程難免會遇到瓶頸或找不到哪裡有問題，此時就需要開發人員工具進行除錯解决，<br>現有瀏覽器大部分都有開發人員工具，基本操作上幾乎大同小異。<br>以下使用 Chrome 開發人員工具練習 :</p>
+<p><strong>開啟開發人員工具</strong></p>
+<ul>
+<li>按下 <code>F12</code> ( Ctrl + Shift + I )</li>
+<li>點選「自訂及管理Google Chrome」–&gt;「更多工具」–&gt;「開發人員工具」<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-1.jpg">
+
+</li>
+</ul>
+<h1 id="開發人員工具基本操作"><a href="#開發人員工具基本操作" class="headerlink" title="開發人員工具基本操作"></a>開發人員工具基本操作</h1><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-2.jpg">
+
+<h1 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h1><h3 id="ex-1-比較檢視網頁原始碼與檢查元素差異"><a href="#ex-1-比較檢視網頁原始碼與檢查元素差異" class="headerlink" title="ex.1 比較檢視網頁原始碼與檢查元素差異"></a>ex.1 比較檢視網頁原始碼與檢查元素差異</h3><ul>
+<li><strong>檢視網頁原始碼</strong> 是伺服器傳送給瀏覽器最原始最乾淨的內容。</li>
+<li><strong>檢查</strong> 是執行過JavaScript後渲染後的顯示結果。<br>按滑鼠右鍵<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-3.jpg">
+
+</li>
+</ul>
+<hr>
+<h3 id="ex-2-編輯-HTML-元素及屬性"><a href="#ex-2-編輯-HTML-元素及屬性" class="headerlink" title="ex.2 編輯 HTML 元素及屬性"></a>ex.2 編輯 HTML 元素及屬性</h3><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-4.jpg">
+
+<p>選取 HTML 標籤後 :</p>
+<ul>
+<li>右鍵選取「Edit as HTML」可以編輯HTML內容。</li>
+<li>右鍵選取「Copy &gt; Copy element」可以複製 HTML 標籤。</li>
+<li>右鍵選取「Copy &gt; Paste element」可以貼上 HTML 標籤。</li>
+<li>按住不放並且拖曳即可移動 HTML 標籤。</li>
+<li>按下 Delete 鍵即可刪除 HTML 標籤。</li>
+</ul>
+<hr>
+<h3 id="ex-3-編輯-CSS-樣式及屬性"><a href="#ex-3-編輯-CSS-樣式及屬性" class="headerlink" title="ex.3 編輯 CSS 樣式及屬性"></a>ex.3 編輯 CSS 樣式及屬性</h3><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-5.jpg">
+
+<ul>
+<li>在樣式的空白處滑鼠左鍵按一下，可新增CSS屬性。</li>
+<li>將CSS屬性名稱前面勾選取消，即取消該屬性效果。</li>
+<li>將CSS屬性名稱刪除即可刪除。</li>
+<li>如果CSS屬性有出現刪除線，表示此CSS屬性被權重較重的條件覆蓋。</li>
+</ul>
+<hr>
+<h3 id="ex-4-HTTP-狀態碼與網路狀態"><a href="#ex-4-HTTP-狀態碼與網路狀態" class="headerlink" title="ex.4 HTTP 狀態碼與網路狀態"></a>ex.4 HTTP 狀態碼與網路狀態</h3><div class="note info">
+            <p>當我們在瀏覽器上輸入一個網址並按下 Enter 鍵後，瀏覽器會將所有資訊放在 HTTP 封包的 header 中，<br>傳送到伺服器上，經過伺服器處理過後，伺服器也會將資訊放在 HTTP 封包的 header 中傳送回來。<br>使用開發人員工具 Network 功能，就可查看這些 HTTP 封包的 header 資訊。</p>
+          </div>
+
+<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-6.jpg">
+
+<p>Network 主要功能就是可以查看伺服器傳送與接收的相關資訊，<br>例如檔案名稱、傳送方式、狀態碼、檔案類型、引發位置、檔案大小、花費時間等等。</p>
+<p><strong>以下為常見狀態碼 ( Status) :</strong></p>
+<ul>
+<li>狀態碼 200 : 請求成功。訊息代表用戶端要求處理成功或伺服器端成功回傳網頁。</li>
+<li>狀態碼 301 : 永久轉址。永久轉址會自動將要求者(用戶端)導向新網址。</li>
+<li>狀態碼 302 : 短暫轉址。短暫轉址類似於永久轉址，會自動將要求者(用戶端)導向另一個網址。</li>
+<li>狀態碼 304 : 未變動或未修改。用戶端要求網頁自上次後未經過任何修改，當伺服器端傳回該回應時，並不會傳回該網頁內容。</li>
+<li>狀態碼 404 : 請求失敗。用戶端要求存取襠案或網頁已移動或可能不存在。</li>
+<li>狀態碼 500 : 伺服器錯誤，無法回應，伺服器端內部發生錯誤，導致無法執行用戶端要求。</li>
+</ul>
+<div class="note success">
+            <p>HTTP 狀態碼指的是從伺服器端回應(HTTP Response)的狀態，對於狀態的分類可區分三個層級，分別用三個數字表示，第一個數字為大類、第二個數字為中類、第三個數字為小類。</p><ul><li>1xx - 參考資訊 (Informational)</li><li>2xx - 成功 (OK) ex. 200 - 確定。 用戶端要求成功。</li><li>3xx - 重新導向 (Redirection)</li><li>4xx - 用戶端錯誤 (Client Error) ex. 404 - 找不到。</li><li>5xx - 伺服器錯誤 (Server Error)</li></ul><p>參考<a href="https://blog.miniasp.com/post/2009/01/16/Web-developer-should-know-about-HTTP-Status-Code" target="_blank" rel="noopener">保哥blog 網頁開發人員應了解的 HTTP 狀態碼</a></p>
+          </div>
+
+<hr>
+<h3 id="ex-5-還原程式碼格式化排版"><a href="#ex-5-還原程式碼格式化排版" class="headerlink" title="ex.5 還原程式碼格式化排版"></a>ex.5 還原程式碼格式化排版</h3><p>遇到有壓縮過的程式碼，可以使用開發工具中的 <code>Source</code> 標籤的括號按鈕，還原程式碼觀看。<br><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-7.jpg"></p>
+<div class="note success">
+            <p>壓縮目的是為了節省檔案大小，讓傳輸更快速。</p><ul><li>壓縮大約可以節省 30 ~ 40% 的檔案空間</li><li>壓縮會去除空白，空白是為了閱讀方便，但程式不需要。</li><li>換行部分也會串在一起。</li><li>變數也會換名稱，換成比較簡易，也是為了節省空間。</li></ul><p><strong>還原程式碼功能僅能還原排版格式，變數無法還原壓縮前的名稱。</strong></p>
+          </div>
+
+<hr>
+<h3 id="ex-6-以往使用-alert-顯示資料"><a href="#ex-6-以往使用-alert-顯示資料" class="headerlink" title="ex.6 以往使用 alert 顯示資料"></a>ex.6 以往使用 alert 顯示資料</h3><p>以前除錯都會用 alert 來中斷跟顯示資料。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/developer/01/" target="_blank" rel="noopener">ex.6 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"page"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Prev<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Next<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> number = i;</span><br><span class="line">    alert(<span class="string">"i="</span> + number);</span><br><span class="line">    $(<span class="string">".page li:last"</span>).before(<span class="string">"&lt;li&gt;&lt;a href=\"#\"&gt;"</span> + (i + <span class="number">1</span>) + <span class="string">"&lt;/a&gt;&lt;/li&gt;"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<div class="note default">
+            <ul><li>for (var i = 0; i &lt; 3; i++)  使用迴圈。</li><li>alert(“i=” + number); 用 <code>alert</code> 檢查 i 的目前數字。</li><li>$(“.page li:last”).before() 指定 li:last 最後的 li 前面用 <code>.before</code> : 選擇指定元素之前插入元素。</li><li>陸續插入數字，直到迴圈結束。</li></ul>
+          </div>
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JQuery/" rel="tag"># JQuery</a>
+              <a href="/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AFJQuery%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0/" rel="tag"># 前端JQuery應用實戰</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/jquery/20200409/3107037011/" rel="prev" title="jQuery的添加元素 - append() / prepend() / after() / before()">
+      <i class="fa fa-chevron-left"></i> jQuery的添加元素 - append() / prepend() / after() / before()
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#開發人員工具除錯技巧"><span class="nav-number">1.</span> <span class="nav-text">開發人員工具除錯技巧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#開發人員工具基本操作"><span class="nav-number">2.</span> <span class="nav-text">開發人員工具基本操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#練習"><span class="nav-number">3.</span> <span class="nav-text">練習</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-1-比較檢視網頁原始碼與檢查元素差異"><span class="nav-number">3.0.1.</span> <span class="nav-text">ex.1 比較檢視網頁原始碼與檢查元素差異</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-2-編輯-HTML-元素及屬性"><span class="nav-number">3.0.2.</span> <span class="nav-text">ex.2 編輯 HTML 元素及屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-3-編輯-CSS-樣式及屬性"><span class="nav-number">3.0.3.</span> <span class="nav-text">ex.3 編輯 CSS 樣式及屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-4-HTTP-狀態碼與網路狀態"><span class="nav-number">3.0.4.</span> <span class="nav-text">ex.4 HTTP 狀態碼與網路狀態</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-5-還原程式碼格式化排版"><span class="nav-number">3.0.5.</span> <span class="nav-text">ex.5 還原程式碼格式化排版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-6-以往使用-alert-顯示資料"><span class="nav-number">3.0.6.</span> <span class="nav-text">ex.6 以往使用 alert 顯示資料</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gary"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Gary</p>
+  <div class="site-description" itemprop="description">前端學習筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gary Note  - 蓋瑞筆記室</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+</html>
