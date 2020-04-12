@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-gary.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-gary.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-gary.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://garyissogood.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#37c6c0","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="前端JQuery應用實戰筆記 3 - 開發人員工具 (下)">
+<meta property="og:url" content="https://garyissogood.github.io/jquery/jquery-application/20200412/1197564326/index.html">
+<meta property="og:site_name" content="Gary Note">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="article:published_time" content="2020-04-12T13:00:21.000Z">
+<meta property="article:modified_time" content="2020-04-12T15:45:43.861Z">
+<meta property="article:author" content="Gary">
+<meta property="article:tag" content="w3HexSchool">
+<meta property="article:tag" content="JQuery">
+<meta property="article:tag" content="前端JQuery應用實戰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garyissogood.github.io/images/loading.gif">
+
+<link rel="canonical" href="https://garyissogood.github.io/jquery/jquery-application/20200412/1197564326/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>前端JQuery應用實戰筆記 3 - 開發人員工具 (下) | Gary Note</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158633037-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158633037-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gary Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">蓋瑞的學習筆記室</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://garyissogood.github.io/jquery/jquery-application/20200412/1197564326/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gary">
+      <meta itemprop="description" content="前端學習筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gary Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端JQuery應用實戰筆記 3 - 開發人員工具 (下)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-04-12 21:00:21 / 修改時間：23:45:43" itemprop="dateCreated datePublished" datetime="2020-04-12T21:00:21+08:00">2020-04-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/jquery-application/" itemprop="url" rel="index">
+                    <span itemprop="name">前端JQuery應用實戰</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/banner3-2.jpg">
+<a id="more"></a>
+
+
+<h1 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h1><h3 id="ex-7-在程式碼設置中斷點"><a href="#ex-7-在程式碼設置中斷點" class="headerlink" title="ex.7 在程式碼設置中斷點"></a>ex.7 在程式碼設置中斷點</h3><p>現在可以使用開發者工具來除錯。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/developer/02/" target="_blank" rel="noopener">ex.7 練習</a></p>
+<p><strong>index.html / all.js 同 ex.6</strong> </p>
+<ol>
+<li>到 <code>Source</code> 打開程式碼。</li>
+<li>點選測試的程式碼前的數字排列號碼，點選會有藍色中斷標誌符號。<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-8.jpg"></li>
+<li>重整網頁</li>
+<li>畫面會出現 debugger 方框，底下程式碼會開始跑程式並到中斷點標籤停下，等待開始下一步<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-9.jpg"></li>
+<li>箭頭按下可以繼續讓程式跑，這邊是跑迴圈，所以每按一次會跑一次目前 i = 多少。 <img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-10.jpg"></li>
+<li>在除錯過程取消中斷點標籤，就可以讓程式繼續跑下去。</li>
+<li>可以設定多個中斷點除錯。</li>
+</ol>
+<hr>
+<h3 id="ex-8-設定中斷點中斷條件"><a href="#ex-8-設定中斷點中斷條件" class="headerlink" title="ex.8 設定中斷點中斷條件"></a>ex.8 設定中斷點中斷條件</h3><p>在開發者工具中使用中斷點，也可以設定中斷的判斷條件，這邊用 1~100 的平方，在產生的過程來設定中斷條件。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/developer/03/" target="_blank" rel="noopener">ex.8 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"nav nav-tabs nav-stacked"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="number">100</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> number = i;</span><br><span class="line">    <span class="keyword">var</span> output = <span class="string">"&lt;li&gt;&lt;a&gt;"</span> + number + <span class="string">"的平方是"</span> + (number * number) + <span class="string">"&lt;/a&gt;&lt;/li&gt;"</span>;  <span class="comment">//組建字串</span></span><br><span class="line">    $(<span class="string">"ul"</span>).append(output);      <span class="comment">// 物件.append  在物件後面插入內容</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-11.jpg">
+
+<div class="note default">
+            <ul><li>點選中斷點右鍵，選擇 Edit breakpoint，開啟判斷輸入框。</li><li>輸入要判斷中斷的條件，輸入完成後中斷標籤就會變成橘色，以視辨別。</li><li>這邊練習是用 i &gt; 66 ，意思就是迴圈會跑到 67 後中斷。</li><li>比較常用在迴圈程式用。</li></ul>
+          </div>
+
+
+
+<hr>
+<h3 id="ex-9-逐步執行觀察變數值"><a href="#ex-9-逐步執行觀察變數值" class="headerlink" title="ex.9 逐步執行觀察變數值"></a>ex.9 逐步執行觀察變數值</h3><p>開發者工具中使用中斷點，也可以逐步看程式跑動的過程，這邊使用每天工作的日薪加總，利用快捷鍵逐步觀察變數跑動過程。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/developer/04/" target="_blank" rel="noopener">ex.9 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"nav nav-tabs nav-stacked"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">salary</span>(<span class="params"></span>) </span>&#123;             <span class="comment">//計算日薪的函式</span></span><br><span class="line">    <span class="keyword">var</span> money = <span class="number">36000</span>;</span><br><span class="line">    <span class="keyword">var</span> pay = money / <span class="number">30</span>;</span><br><span class="line">    <span class="keyword">var</span> work = pay * day;</span><br><span class="line">    work = <span class="built_in">parseInt</span>(work, <span class="number">10</span>);    <span class="comment">//用parseInt返回整數</span></span><br><span class="line">    <span class="keyword">return</span> work;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="number">30</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> day = i;</span><br><span class="line">    <span class="keyword">var</span> out = <span class="string">"&lt;li&gt;&lt;a&gt;工作"</span> + day + <span class="string">"天領薪水"</span> + salary(day) + <span class="string">"元&lt;/a&gt;&lt;/li&gt;"</span>;</span><br><span class="line">    $(<span class="string">"ul"</span>).append(out);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-12.jpg">
+
+<div class="note success">
+            <p>使用快捷鍵</p><ul><li><code>F8</code> 繼續執行。</li><li><code>F10</code> 逐步執行 ( 跳過函式 )。</li><li><code>F11</code> 逐步執行 ( 進入函式 )。</li><li><code>Shift + F11</code> 逐步執行 ( 跳出函式 )。</li></ul>
+          </div>
+<div class="note info">
+            <ul><li><a href="https://www.w3school.com.cn/jsref/jsref_parseInt.asp" target="_blank" rel="noopener">parseInt用法</a></li><li><a href="https://ithelp.ithome.com.tw/articles/10211289" target="_blank" rel="noopener">function搭配return用法</a></li></ul>
+          </div>
+
+<hr>
+<h3 id="ex-10-debugger-指令"><a href="#ex-10-debugger-指令" class="headerlink" title="ex.10 debugger 指令"></a>ex.10 debugger 指令</h3><p>用程式碼去設定中斷點，前提是要開啟開發人員工具。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/developer/05/" target="_blank" rel="noopener">ex.10 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"點擊按鈕"</span> <span class="attr">class</span>=<span class="string">"btn btn-info"</span> <span class="attr">id</span>=<span class="string">"testbtn"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">"#testbtn"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">debugger</span>;                                <span class="comment">//設定debugger來中斷</span></span><br><span class="line">    alert(<span class="string">"您已按下"</span> + $(<span class="keyword">this</span>).val());        <span class="comment">//抓取目前物件的值</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-13.jpg">
+
+<div class="note success">
+            <ul><li><code>debugger</code> 只能在有開啟開發者工具時，才會有作用。</li><li>沒開啟開發者工具，則會跳過繼續執行程式。</li><li>IE8 以上才開始支援 debugger。</li></ul>
+          </div>
+
+
+<hr>
+<h3 id="ex-11-發生錯誤中斷執行"><a href="#ex-11-發生錯誤中斷執行" class="headerlink" title="ex.11 發生錯誤中斷執行"></a>ex.11 發生錯誤中斷執行</h3><p>當程式發生錯誤，通常會到開發者工具的 Console 檢查錯誤。</p>
+<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-14.jpg">
+
+<div class="note default">
+            <ul><li>右邊紅框處的紅圈叉叉顯示有多少個錯誤。</li><li>直接點擊紅圈或文字連結，會直接引導程式碼有錯誤的地方。</li><li>在有問題使用中斷標籤，然後重整頁面檢查。</li><li>查出 data 值是 undefined ，所以才導致後面 .length 無法作用。</li></ul>
+          </div>
+<div class="note danger">
+            <p>當程式碼執行發生錯誤問題時，就會立即停止，後續程式碼就不會繼續執行。</p>
+          </div>
+
+<hr>
+<h3 id="ex-12-try…catch-避免發生錯誤中斷執行"><a href="#ex-12-try…catch-避免發生錯誤中斷執行" class="headerlink" title="ex.12 try…catch..避免發生錯誤中斷執行"></a>ex.12 try…catch..避免發生錯誤中斷執行</h3><p>如果想要測試錯誤後能繼續執行，可以使用 try / catch 方法執行。</p>
+<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-15.jpg">
+
+<div class="note default">
+            <ul><li>在 <code>try</code> 裡放置要測試的語法，裡面放置上個引發錯誤的語法。</li><li>在 <code>catch</code> 裡，放入 alert ，將出現問題的訊息顯示出來。</li></ul>
+          </div>
+<div class="note success">
+            <p>如 <code>try</code> 沒問題就執行裡面內容，出現問題時不會顯示錯誤訊息，就執行 <code>catch</code> 裡的內容，後續程式碼會繼續執行。</p>
+          </div>
+
+<hr>
+<h3 id="ex-13-在程式碼中使用輸出Console"><a href="#ex-13-在程式碼中使用輸出Console" class="headerlink" title="ex.13 在程式碼中使用輸出Console"></a>ex.13 在程式碼中使用輸出Console</h3><p>在程式碼加入Console，可以即時顯示要顯示的內容，這邊使用 scrollbar，每次滾動在Console顯示目前數值。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/developer/06/" target="_blank" rel="noopener">ex.13 練習</a></p>
+<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-16.jpg">
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="built_in">window</span>).scroll(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;             </span><br><span class="line">    $(<span class="string">"#show"</span>).text($(<span class="keyword">this</span>).scrollTop()); <span class="comment">//抓取現在瀏覽器的 scroll 的數值，並寫上去網站</span></span><br><span class="line">    <span class="built_in">console</span>.log($(<span class="keyword">this</span>).scrollTop());     </span><br><span class="line">  &#125;).scroll();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="note default">
+            <p>使用 <code>console.log</code> 在開發者工具裡面的 console 產生訊息。</p>
+          </div>
+<div class="note info">
+            <p>IE8/IE9 必須開啟過開發人員工具才能使用console物件，否則會產生錯誤訊息，此問题可用<br><code>var console = console || ( log:function()){}};</code> 解決。</p>
+          </div>
+
+
+<hr>
+<h3 id="ex-14-Console-小技巧"><a href="#ex-14-Console-小技巧" class="headerlink" title="ex.14 Console 小技巧"></a>ex.14 Console 小技巧</h3><p>在開發工具裡的 Console 一些顯示方式。</p>
+<img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-17.jpg">
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.warn(<span class="string">"警告"</span>);</span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">"錯誤"</span>);           <span class="comment">//要判斷是程式本身錯誤還只是console特意放的提示</span></span><br><span class="line">    <span class="built_in">console</span>.group(<span class="string">"群組1"</span>);          <span class="comment">//群組開頭</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"文字%s"</span>, <span class="string">"文字"</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"數字%d"</span>, <span class="number">1000</span>);</span><br><span class="line">    <span class="built_in">console</span>.groupEnd();              <span class="comment">//群組結尾</span></span><br><span class="line">    <span class="built_in">console</span>.dir(<span class="built_in">document</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"%c測試文字"</span>, <span class="string">"font-size: 42px; color: red"</span>);</span><br><span class="line">    <span class="built_in">console</span>.count(<span class="string">"計數器"</span>);</span><br><span class="line">    <span class="comment">//console.log($0); //$0~$4</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="note default">
+            <ul><li><code>console.warn();</code>  黃色背景的警示。</li><li><code>console.error();</code> 要判斷是程式本身錯誤還只是console特意放的提示，通常是放在框架或表格輸入錯誤時的提示，或者使用舊的方式導致錯誤前的提示等。</li><li><code>console.group();</code> 群組的開頭，之後console放置的內容，包括到 <code>console.groupEnd();</code>群組結尾結束。</li><li><code>console.dir(document);</code> dir 用來輸出 DOM 的屬性。</li><li><code>console.log(&quot;%cXX&quot;,....);</code>  用 %c 來套用樣式，逗點後面就放上要套用的樣式屬性，只能用基本的顏色大小等設定。</li><li><code>console.count();</code> 計算()裡的值被計算幾次，每console一次就計算一次。</li></ul>
+          </div>
+<div class="note info">
+            <p><code>console.log($0)</code> 只能在開發工具裡的 Console 顯示使用，依照點擊順序，依序紀錄 <code>$0 ~ $4</code>，有5組記憶空間。<br><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/3-18.jpg"></p>
+          </div>
+
+<hr>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+              <a href="/tags/JQuery/" rel="tag"># JQuery</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AFJQuery%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0/" rel="tag"># 前端JQuery應用實戰</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/jquery/jquery-application/20200409/1585074407/" rel="prev" title="前端JQuery應用實戰筆記 3 - 開發人員工具 (上)">
+      <i class="fa fa-chevron-left"></i> 前端JQuery應用實戰筆記 3 - 開發人員工具 (上)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#練習"><span class="nav-number">1.</span> <span class="nav-text">練習</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-7-在程式碼設置中斷點"><span class="nav-number">1.0.1.</span> <span class="nav-text">ex.7 在程式碼設置中斷點</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-8-設定中斷點中斷條件"><span class="nav-number">1.0.2.</span> <span class="nav-text">ex.8 設定中斷點中斷條件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-9-逐步執行觀察變數值"><span class="nav-number">1.0.3.</span> <span class="nav-text">ex.9 逐步執行觀察變數值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-10-debugger-指令"><span class="nav-number">1.0.4.</span> <span class="nav-text">ex.10 debugger 指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-11-發生錯誤中斷執行"><span class="nav-number">1.0.5.</span> <span class="nav-text">ex.11 發生錯誤中斷執行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-12-try…catch-避免發生錯誤中斷執行"><span class="nav-number">1.0.6.</span> <span class="nav-text">ex.12 try…catch..避免發生錯誤中斷執行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-13-在程式碼中使用輸出Console"><span class="nav-number">1.0.7.</span> <span class="nav-text">ex.13 在程式碼中使用輸出Console</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-14-Console-小技巧"><span class="nav-number">1.0.8.</span> <span class="nav-text">ex.14 Console 小技巧</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gary"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Gary</p>
+  <div class="site-description" itemprop="description">前端學習筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gary Note  - 蓋瑞筆記室</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+</html>
