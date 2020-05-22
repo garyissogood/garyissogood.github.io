@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-gary.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-gary.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-gary.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://garyissogood.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#37c6c0","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.json',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="前端JQuery應用實戰筆記 4 - JSON 資料格式 (上)">
+<meta property="og:url" content="https://garyissogood.github.io/jquery/jquery-application/20200522/1849967823/index.html">
+<meta property="og:site_name" content="Gary Note">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="og:image" content="https://garyissogood.github.io/images/loading.gif">
+<meta property="article:published_time" content="2020-05-22T03:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-22T14:09:30.907Z">
+<meta property="article:author" content="Gary">
+<meta property="article:tag" content="w3HexSchool">
+<meta property="article:tag" content="JQuery">
+<meta property="article:tag" content="前端JQuery應用實戰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://garyissogood.github.io/images/loading.gif">
+
+<link rel="canonical" href="https://garyissogood.github.io/jquery/jquery-application/20200522/1849967823/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>前端JQuery應用實戰筆記 4 - JSON 資料格式 (上) | Gary Note</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158633037-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158633037-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Gary Note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">蓋瑞的學習筆記室</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜尋..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://garyissogood.github.io/jquery/jquery-application/20200522/1849967823/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Gary">
+      <meta itemprop="description" content="前端學習筆記">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gary Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端JQuery應用實戰筆記 4 - JSON 資料格式 (上)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-05-22 11:00:00 / 修改時間：22:09:30" itemprop="dateCreated datePublished" datetime="2020-05-22T11:00:00+08:00">2020-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">JQuery</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jquery/jquery-application/" itemprop="url" rel="index">
+                    <span itemprop="name">前端JQuery應用實戰</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">閱讀次數：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/banner4-1.jpg">
+<a id="more"></a>
+
+
+<h1 id="什麼是JSON"><a href="#什麼是JSON" class="headerlink" title="什麼是JSON"></a>什麼是JSON</h1><p>一般網頁設計通常都會包含資料，資料維護比較不容易。透過 JSON 和 XML 就可以將網真結構(HTML)與資料(Data)完全分開，會更容易維護。而 JSON（JavaScript Object Notation，JavaScript物件表示法）是一種輕量級的資料交換語言，該語言以易於讓人閱讀的文字為基礎，用來傳輸由屬性值或者序列性的值組成的資料物件。<br>簡易來說就是的<code>陣列</code>跟<code>物件</code>。<br><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/4-1.jpg"><br><code>**JSON 無法直接載入 HTML , 必須透過 Javascript 載入**</code></p>
+<h1 id="JSON-應用在哪些地方"><a href="#JSON-應用在哪些地方" class="headerlink" title="JSON 應用在哪些地方"></a>JSON 應用在哪些地方</h1><ul>
+<li>前端與後端的溝通介面</li>
+<li>製作好介面，前後端可同時進行開發工作</li>
+<li>前端撰寫好相關程式，改指向後端所提供 API 路徑即可</li>
+</ul>
+<h1 id="JSON-資料結構語法"><a href="#JSON-資料結構語法" class="headerlink" title="JSON 資料結構語法"></a>JSON 資料結構語法</h1><p><a href="http://wwwjson.org/" target="_blank" rel="noopener">JSON 資料結構語法網址</a><br><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/4-2.jpg"></p>
+<h1 id="JSON-與-XML格式比較"><a href="#JSON-與-XML格式比較" class="headerlink" title="JSON 與 XML格式比較"></a>JSON 與 XML格式比較</h1><ul>
+<li>在相同資料內容情況下，JSON 文字字數比較少，XML 字數相對比較多。</li>
+<li>目前使用 JSON 資料交換格式已經大幅領先 XML 資料交換格式。</li>
+</ul>
+<h1 id="練習"><a href="#練習" class="headerlink" title="練習"></a>練習</h1><h3 id="ex-1-訊息公告-JSON-字串"><a href="#ex-1-訊息公告-JSON-字串" class="headerlink" title="ex.1 訊息公告-JSON 字串"></a>ex.1 訊息公告-JSON 字串</h3><p>利用Javascript讀取JSON資料檔案，並顯示於HTML上。</p>
+<p><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/json/01/" target="_blank" rel="noopener">ex.1 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"message"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>message.json</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"讀取JSON檔案資料，文字目前顯示網頁正在維護中。請之後再重試！"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $.getJSON(<span class="string">"message.json"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        $(<span class="string">"#message"</span>).html(data);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="note success">
+            <ul><li>$.getJSON 來獲取 JSON 檔案</li><li>$().html 用來設置 inner HTML</li></ul>
+          </div>
+
+<div class="note info">
+            <p>JSON 資料型態有四種:</p><ul><li>字串 ( String )</li><li>數字 ( Number )</li><li>布林值 ( Boolean ) </li><li>空值 ( null )</li></ul>
+          </div>
+<div class="note danger">
+            <p>JSON 中的資料格式<code>無法使用</code>:</p><ul><li>末定義 ( undefined )</li><li>函式 ( function ) </li><li>正规式 ( regular expression )</li></ul><p><strong>JSON 一定要用雙引號，不能用單引號</strong></p>
+          </div>
+
+
+<hr>
+<h3 id="ex-2-相簿-JSON陣列"><a href="#ex-2-相簿-JSON陣列" class="headerlink" title="ex.2 相簿-JSON陣列"></a>ex.2 相簿-JSON陣列</h3><p>將相片連結放在JSON，再利用Javascript去讀取，資料與畫面分開處理。</p>
+<p><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/json/02/" target="_blank" rel="noopener">ex.2 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"photo"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">height</span>=<span class="string">"100%"</span> <span class="attr">id</span>=<span class="string">"image"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>photos.json</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    <span class="string">"images/img1.jpg"</span>,</span><br><span class="line">    <span class="string">"images/img2.jpg"</span>,</span><br><span class="line">    <span class="string">"images/img3.jpg"</span>,</span><br><span class="line">    <span class="string">"images/img4.jpg"</span></span><br><span class="line">]  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 陣列 (Array) 顯示符號 [] (中括號)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $.getJSON(<span class="string">"photos.json"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> i = <span class="number">0</span>;   <span class="comment">//索引數</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= data.length) &#123;    <span class="comment">//循環判斷</span></span><br><span class="line">                i = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            $(<span class="string">"#image"</span>).attr(<span class="string">"src"</span>, data[i]);  <span class="comment">//插入JSON連結內容</span></span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        setInterval(run, <span class="number">3000</span>);   <span class="comment">//每3秒定時呼叫</span></span><br><span class="line">        run();  <span class="comment">//先執行一次，開頭才不會沒內容</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<div class="note success">
+            <ul><li>$.getJSON 讀入 JSON 資料到 data 裡</li><li>判斷 data 總共有幾筆資料，並將資料印入 HTML</li><li>setInterval(run, 3000); 每3秒定時呼叫 run 函式 </li><li>run();  先執行一次，開頭才不會沒內容</li></ul>
+          </div>
+
+<div class="note info">
+            <ul><li>JSON 資料集合有兩種 : 陣列 ( Array ) / 物件 ( Object )</li><li>定時呼叫使用 <code>setlnterval</code> 方法，每間隔呼叫。</li><li>延遲呼叫使用 <code>setTimeout</code> 方法，只呼叫一次。</li></ul>
+          </div>
+
+
+<hr>
+<h3 id="ex-3-相簿切換效果和文字說明-JSON巢狀陣列"><a href="#ex-3-相簿切換效果和文字說明-JSON巢狀陣列" class="headerlink" title="ex.3 相簿切換效果和文字說明-JSON巢狀陣列"></a>ex.3 相簿切換效果和文字說明-JSON巢狀陣列</h3><p>延續上個練習，將JSON資料做巢狀陣列，圖片配合文字一起使用。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/json/03/" target="_blank" rel="noopener">ex.3 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"photo"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">height</span>=<span class="string">"100%"</span> <span class="attr">id</span>=<span class="string">"image"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>photos.json</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    [</span><br><span class="line">        <span class="string">"../images/img1.jpg"</span>,</span><br><span class="line">        <span class="string">"第一張，圖片說明文章。"</span></span><br><span class="line">    ],</span><br><span class="line">    [</span><br><span class="line">        <span class="string">"../images/img2.jpg"</span>,</span><br><span class="line">        <span class="string">"第二張，圖片說明文章。"</span></span><br><span class="line">    ],</span><br><span class="line">    [</span><br><span class="line">        <span class="string">"../images/img3.jpg"</span>,</span><br><span class="line">        <span class="string">"第三張，圖片說明文章。"</span></span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $.getJSON(<span class="string">"photos.json"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= data.length) &#123;</span><br><span class="line">                i = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            $(<span class="string">"#image"</span>).fadeOut(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;    <span class="comment">//替圖片做淡入淡出動畫效果</span></span><br><span class="line">                $(<span class="keyword">this</span>).attr(<span class="string">"src"</span>, data[i][<span class="number">0</span>]).fadeIn();</span><br><span class="line">                $(<span class="string">"#text"</span>).text(data[i][<span class="number">1</span>]);</span><br><span class="line">                i++; </span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        setInterval(run, <span class="number">3000</span>);</span><br><span class="line">        run();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="note success">
+            <p>要把 i++ 搬入 $(“#image”).fadeOut 的 function 裡面，不然一開始執行程式，i 會自動 +1 開始計算，這樣就不會從第一張開始，到時循環會出錯。</p>
+          </div>
+<div class="note info">
+            <ul><li>data[i][0]~data[i][1] 選擇JSON資料裡的子項目，用兩個並列中括號顯示。</li><li>fadeIn() / fadeOut() 也算是非同步</li></ul>
+          </div>
+
+
+<hr>
+<h3 id="ex-4-輪播廣告燈箱-JSON-巢狀陣列"><a href="#ex-4-輪播廣告燈箱-JSON-巢狀陣列" class="headerlink" title="ex.4 輪播廣告燈箱-JSON 巢狀陣列"></a>ex.4 輪播廣告燈箱-JSON 巢狀陣列</h3><p>延續輪播練習，將JSON資料做巢狀陣列，圖片配合連結一起使用，並由右往左循環輪播。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/json/04/" target="_blank" rel="noopener">ex.4 練習</a></p>
+<p><strong>index.html</strong>  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scrollable"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inbox"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>data.json</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    [</span><br><span class="line">        <span class="string">"../images/img1.jpg"</span>,</span><br><span class="line">        <span class="string">"http://www.google.com.tw"</span></span><br><span class="line">    ],</span><br><span class="line">    [</span><br><span class="line">        <span class="string">"../images/img2.jpg"</span>,</span><br><span class="line">        <span class="string">"http://www.yahoo.com.tw"</span></span><br><span class="line">    ],</span><br><span class="line">    [</span><br><span class="line">        <span class="string">"../images/img3.jpg"</span>,</span><br><span class="line">        <span class="string">"http://www.facebook.com"</span></span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $.getJSON(<span class="string">"data.json"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> html = <span class="string">""</span>;</span><br><span class="line">        <span class="comment">//開始跑迴圈將json資料跑出來放在html變數裡</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">            html += <span class="string">"&lt;div&gt;"</span>;</span><br><span class="line">            html += <span class="string">"&lt;a href=\""</span> + data[i][<span class="number">1</span>] + <span class="string">"\" target=\"_blank\"&gt;&lt;img src=\""</span> + data[i][<span class="number">0</span>] + <span class="string">"\"&gt;&lt;/a&gt;"</span>;</span><br><span class="line">            html += <span class="string">"&lt;/div&gt;"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $(<span class="string">".inbox"</span>).html(html); <span class="comment">//印出html</span></span><br><span class="line">        $(<span class="string">".inbox&gt;div"</span>).first().clone().appendTo($(<span class="string">".inbox"</span>)); <span class="comment">//複製第一張圖片到最後面去</span></span><br><span class="line">        <span class="keyword">var</span> index = <span class="number">0</span>;  <span class="comment">//放入計算的索引值</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            $(<span class="string">".inbox"</span>).animate(&#123; <span class="attr">left</span>: <span class="string">"-=500"</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (index &gt;= data.length - <span class="number">1</span>) &#123;</span><br><span class="line">                    index = <span class="number">-1</span>;</span><br><span class="line">                    $(<span class="keyword">this</span>).css(<span class="string">"left"</span>, <span class="number">0</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                index++;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> sid = setInterval(run, <span class="number">2000</span>); <span class="comment">//設定定時器</span></span><br><span class="line">        $(<span class="string">".inbox"</span>).hover(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            clearInterval(sid);</span><br><span class="line">        &#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            sid = setInterval(run, <span class="number">2000</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<div class="note default">
+            <p>圖片循環輪播方式，在整列圖片最後方複製第一張圖片，跟著輪放，等到放最後一張(也就是複製的第一張)，在馬上切換到原始的一張，因為都是同一張照片，切換視覺會看不出來，就可以一直重複播放了。<br><img src="/images/loading.gif" data-original="http://www.zhu-xuan.com.tw/hexo/images/learn/jquery/2019-tommy-course/4-3.jpg"></p><p><code>$(&quot;.inbox&gt;div&quot;).first().clone().appendTo($(&quot;.inbox&quot;));</code> </p><ul><li>$(“.inbox&gt;div”).first().clone() 程式先把第一張圖片複製</li><li>.appendTo($(“.inbox”) 再把複製的第一張圖放到最後面去</li></ul><p><code>$(&quot;.inbox&quot;).animate({ left: &quot;-=500&quot; }</code></p><ul><li>.animate() 使用動畫來位移</li><li>-=500 事先讀取本身目前位置 0 然後在 -500。</li></ul><p><code>if (index &gt;= data.length - 1)</code><br>假如索引數如果大於等於資料的最後一筆-1 (也就是倒數第二筆)。</p><p><code>index = -1; index++;</code><br>函式裡就會改成 -1 ，因後面執行 index++ 會自動再加一筆，索引數就會變 -1+1 = 0，就會回到第一張。</p><p><code>var sid = setInterval(run, 2000);</code><br>設定定時器，放入 sid 變數，並記住當下索引編號的照片。</p><p><code>$(&quot;.inbox&quot;).hover(function () {clearInterval(sid);}, function () {sid = setInterval(run, 2000);});</code><br>當滑鼠移動到照片，定時器會清除停止目前索引的照片，而滑出時，重新啟動定時器，並把目前索引編號加回，這樣照片輪播才能延續。</p>
+          </div>
+
+<div class="note info">
+            <ul><li><p><code>setIlnterval</code> ， <code>setTimeout</code> 方法執行後會回傳一個編號，<br>可利用這編號傳入 <code>clearlnterval</code>，<code>clearTimtout</code> 方法，則可以取消執行。</p></li><li><p><code>\&quot;</code> 在碰到需要單純輸出雙引號又碰到字串頭尾錯誤時，可在雙引號前面加入<code>\</code>使用。</p></li><li><p>轉義字元表示在字串中包含特殊字元，以下為常用轉義字元 :</p><table><thead><tr><th>字元</th><th align="left">意義</th><th align="right">字元</th><th align="center">意義</th></tr></thead><tbody><tr><td><code>\b</code></td><td align="left">後退一格</td><td align="right"><code>\v</code></td><td align="center">垂直Tab</td></tr><tr><td><code>\f</code></td><td align="left">換頁</td><td align="right"><code>\&#39;</code></td><td align="center">單引號</td></tr><tr><td><code>\n</code></td><td align="left">換行</td><td align="right"><code>\&quot;</code></td><td align="center">雙引號</td></tr><tr><td><code>\r</code></td><td align="left">歸位</td><td align="right"><code>\\</code></td><td align="center">反斜線()</td></tr><tr><td><code>\t</code></td><td align="left">Tab</td><td align="right"><code>\uXXXX</code></td><td align="center">Unicode字元 ex:\u08K1</td></tr></tbody></table></li></ul>
+          </div>
+
+
+<hr>
+<h3 id="ex-5-輪播廣告燈箱控制元件-JSON巢狀陣列"><a href="#ex-5-輪播廣告燈箱控制元件-JSON巢狀陣列" class="headerlink" title="ex.5 輪播廣告燈箱控制元件-JSON巢狀陣列"></a>ex.5 輪播廣告燈箱控制元件-JSON巢狀陣列</h3><p>上一例輪播的加強版，增加前後箭頭及張數點選擇的圓點。<br><a href="http://www.zhu-xuan.com.tw/hexo/myexercise/jquery-application/json/05/" target="_blank" rel="noopener">ex.5 練習</a></p>
+<p><strong>index.html</strong>  增加前後箭頭及圓點標籤，並外加一層整個包住。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"outbox"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scrollable"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inbox"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"navi"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"prev"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"next"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>data.json</strong> 同上一例。</p>
+<p><strong>all.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $.getJSON(<span class="string">"data.json"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> html = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">var</span> navi = <span class="string">""</span>;  <span class="comment">//宣告空的圓點變數</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">            html += <span class="string">"&lt;div&gt;"</span>;</span><br><span class="line">            html += <span class="string">"&lt;a href=\""</span> + data[i][<span class="number">1</span>] + <span class="string">"\" target=\"_blank\"&gt;&lt;img src=\""</span> + data[i][<span class="number">0</span>] + <span class="string">"\"&gt;&lt;/a&gt;"</span>;</span><br><span class="line">            html += <span class="string">"&lt;/div&gt;"</span>            </span><br><span class="line">            navi += <span class="string">"&lt;span"</span>; <span class="comment">// 加入圓點</span></span><br><span class="line">            <span class="comment">// 判斷是否為第一個圓點，加上active</span></span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">                navi += <span class="string">" class=\"active\""</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            navi += <span class="string">"&gt;&lt;/span&gt;"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $(<span class="string">".inbox"</span>).html(html);</span><br><span class="line">        $(<span class="string">".navi"</span>).html(navi);  <span class="comment">//寫入html裡的navi</span></span><br><span class="line">        $(<span class="string">".inbox&gt;div"</span>).first().clone().appendTo($(<span class="string">".inbox"</span>));</span><br><span class="line">        <span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//Next往後往下一張跑照片</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> ($(<span class="string">".inbox"</span>).is(<span class="string">":animated"</span>)) <span class="keyword">return</span>;</span><br><span class="line">            $(<span class="string">".inbox"</span>).animate(&#123; <span class="attr">left</span>: <span class="string">"-=500"</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (index &gt;= data.length - <span class="number">1</span>) &#123;</span><br><span class="line">                    index = <span class="number">-1</span>;</span><br><span class="line">                    $(<span class="keyword">this</span>).css(<span class="string">"left"</span>, <span class="number">0</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                index++;</span><br><span class="line">                dot();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//Prev往前往上一張跑照片</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">back</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> ($(<span class="string">".inbox"</span>).is(<span class="string">":animated"</span>)) <span class="keyword">return</span>;</span><br><span class="line">            <span class="comment">//拉出animate外執行,確保數值計算正確回到第一張</span></span><br><span class="line">            <span class="keyword">if</span> (index &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                index = data.length;</span><br><span class="line">                $(<span class="string">".inbox"</span>).css(<span class="string">"left"</span>, index * <span class="number">-500</span>);  </span><br><span class="line">            &#125;</span><br><span class="line">            $(<span class="string">".inbox"</span>).animate(&#123; <span class="attr">left</span>: <span class="string">"+=500"</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;  <span class="comment">//改+數才能往右移動</span></span><br><span class="line">                index--; <span class="comment">//遞減</span></span><br><span class="line">                dot();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> sid = setInterval(run, <span class="number">2000</span>); <span class="comment">//設定定時器        </span></span><br><span class="line">        $(<span class="string">".inbox,.navi,.next,.prev"</span>).hover(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="comment">//增加移停選項</span></span><br><span class="line">            clearInterval(sid);</span><br><span class="line">        &#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            sid = setInterval(run, <span class="number">2000</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//增加圓點函式</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">dot</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            $(<span class="string">".navi&gt;span.active"</span>).removeClass();</span><br><span class="line">            $(<span class="string">".navi&gt;span"</span>).eq(index).addClass(<span class="string">"active"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//點擊部分</span></span><br><span class="line">        $(<span class="string">".next"</span>).click(run);</span><br><span class="line">        $(<span class="string">".prev"</span>).click(back);</span><br><span class="line">        $(<span class="string">".navi&gt;span"</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            index = $(<span class="keyword">this</span>).index();  <span class="comment">//宣告變數為目前點擊的索引數</span></span><br><span class="line">            $(<span class="string">".inbox"</span>).animate(&#123; <span class="attr">left</span>: index * <span class="number">-500</span> &#125;, dot);  <span class="comment">//點擊圓點移動並執行更換已選到的黑點</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<div class="note default">
+            <p> <code>if (i == 0) { navi += &quot; class=\&quot;active\&quot;&quot;; }</code><br> 一開始用來判斷第一個圓點加上 active 的標籤 (為選取狀態)。<br> <code>if ($(&quot;.inbox&quot;).is(&quot;:animated&quot;)) return;</code><br> 在兩個 run 、 back 兩個函式加入，目的是判斷目前是否為 :animated (持續動作) 狀態，如果是就停止動作，因為如果一直按很多次，程式就會執行很多次，就算移到別的地方動作，還是會先執行完才會做其他動作，所以加入此語法，可以馬上取消動作進而執行其他動作。<br><code>$(&quot;.navi&gt;span&quot;).eq(index).addClass(&quot;active&quot;);</code><br>跳到索引數的 span 加上 active 的標籤 (為選取狀態)。</p>
+          </div>
+
+
+<div class="note info">
+            <ul><li>index 方法可以取得目前選取器在同層中的索引數。</li><li>eq 方法可以從選取器篩選出第 n 個内容 ( n 從 0 開始 )</li><li>.eq(0)、eq(“”) 等同於 .first() 方法</li><li>.eq(-1) 等同於 .last() 方法。</li></ul>
+          </div>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/w3HexSchool/" rel="tag"># w3HexSchool</a>
+              <a href="/tags/JQuery/" rel="tag"># JQuery</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AFJQuery%E6%87%89%E7%94%A8%E5%AF%A6%E6%88%B0/" rel="tag"># 前端JQuery應用實戰</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/jquery/jquery-application/20200412/1197564326/" rel="prev" title="前端JQuery應用實戰筆記 3 - 開發人員工具 (下)">
+      <i class="fa fa-chevron-left"></i> 前端JQuery應用實戰筆記 3 - 開發人員工具 (下)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什麼是JSON"><span class="nav-number">1.</span> <span class="nav-text">什麼是JSON</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-應用在哪些地方"><span class="nav-number">2.</span> <span class="nav-text">JSON 應用在哪些地方</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-資料結構語法"><span class="nav-number">3.</span> <span class="nav-text">JSON 資料結構語法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-與-XML格式比較"><span class="nav-number">4.</span> <span class="nav-text">JSON 與 XML格式比較</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#練習"><span class="nav-number">5.</span> <span class="nav-text">練習</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-1-訊息公告-JSON-字串"><span class="nav-number">5.0.1.</span> <span class="nav-text">ex.1 訊息公告-JSON 字串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-2-相簿-JSON陣列"><span class="nav-number">5.0.2.</span> <span class="nav-text">ex.2 相簿-JSON陣列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-3-相簿切換效果和文字說明-JSON巢狀陣列"><span class="nav-number">5.0.3.</span> <span class="nav-text">ex.3 相簿切換效果和文字說明-JSON巢狀陣列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-4-輪播廣告燈箱-JSON-巢狀陣列"><span class="nav-number">5.0.4.</span> <span class="nav-text">ex.4 輪播廣告燈箱-JSON 巢狀陣列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ex-5-輪播廣告燈箱控制元件-JSON巢狀陣列"><span class="nav-number">5.0.5.</span> <span class="nav-text">ex.5 輪播廣告燈箱控制元件-JSON巢狀陣列</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gary"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Gary</p>
+  <div class="site-description" itemprop="description">前端學習筆記</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gary Note  - 蓋瑞筆記室</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+</html>
